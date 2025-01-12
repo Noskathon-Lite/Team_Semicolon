@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./criminal.css";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 const Criminal = () => {
   const [criminals, setCriminals] = useState([]);
 
@@ -60,8 +60,8 @@ const Criminal = () => {
          
         </div>
       </div>
-     
-        <button>Add criminal</button>
+       <button>Add criminal</button>
+       
       
     </div>
   );
