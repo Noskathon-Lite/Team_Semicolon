@@ -18,13 +18,13 @@
     position: static;
     margin: 0;
     background-color:#2d3482;
-    transition: all 0.5s;
+    /* transition: all 0.5s; */
     /* z-index: 990; */
     width: 100%;
     height: 415px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     
-    box-shadow: 0px 1px 1px 0px rgb(135, 125, 125);
+    /* box-shadow: 0px 1px 1px 0px rgb(135, 125, 125); */
   }
 
   .container{
@@ -33,7 +33,7 @@
     align-items: center;
     flex-direction: column;
     /* flex-wrap: wrap; */
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     width: 100%;
     height:100%;
     /* margin-top: 5px;
@@ -133,7 +133,7 @@
     list-style: none;
     margin-right: 15%;
     padding-left: 15%;
-    gap: 20px;
+    /* gap: 20px; */
   }
   
   .navbar li,
@@ -141,13 +141,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0px 15px;
+    /* padding: 0px 15px; */
     font-family: var(--font-secondary);
     font-size: 16px;
     font-weight: 500;
     color: black;
     white-space: wrap;
-    transition: 0.3s;
+    border-radius: none !important;
+    /* transition: 0.3s; */
   }
   
   .nav-item .nav-link {
@@ -162,8 +163,8 @@
     /* display: inline-block; */
     color: #2d3482;
    
-    /* padding: 10px 20px; */
-    /* border-radius: 5px; */
+   
+    border-radius: none !important;
     font-size: 1rem;
     cursor: pointer;
     
@@ -175,11 +176,13 @@
     /* text-decoration: underline; */
     font-family: var(--font-secondary);
     font-size: 20px;
+    border-radius: none !important;
   }
   .nav-item .nav-link:active {
     color: #003b78!important;
     font-family: var(--font-secondary);
     font-size: 20px;
+    border-radius: none !important;
     /* background-color: white; */
 
   }
@@ -192,7 +195,7 @@
   }
   
   /* header button */
-  .nav-button .btn {
+  /* .nav-button .btn {
     background-color: red;
     color: #003b78;
     font-weight: bold;
@@ -203,7 +206,7 @@
     margin-right: 50px;
     width: max-content;
     height: fit-content;
-  }
+  } */
   .btn a:hover {
     text-decoration: underline;
     background-color: rgb(100, 100, 13);
