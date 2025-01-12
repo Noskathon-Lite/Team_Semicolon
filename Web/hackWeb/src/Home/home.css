@@ -158,7 +158,25 @@ padding: 10px 20px;
 
 .feedback-list{
     padding: 5px;
+    /* display: flex; */
+    justify-content: flex-start;
+    align-items: center;
+   
 }
+.officer-detail{
+    display: flex;
+    justify-content:flex-start;
+    flex-direction: row;
+    gap: 25px;
+}
+.trash-icon{
+    position: absolute;
+    display: inline;
+    right: 12%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
 
 
 /* criminal section */
