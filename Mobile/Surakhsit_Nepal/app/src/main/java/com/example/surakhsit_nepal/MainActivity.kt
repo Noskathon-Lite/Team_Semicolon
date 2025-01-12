@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.surakhsit_nepal.MainPages.CameraPage
 import com.example.surakhsit_nepal.MainPages.HomePage
 import com.example.surakhsit_nepal.MainPages.MainScreen
 import com.example.surakhsit_nepal.Navigation.SetUpNavigation
@@ -32,9 +33,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             navController = rememberNavController()
             //OnBoardingScreen()
-            SetUpNavigation(navController)
+           // SetUpNavigation(navController)
             //HomePage(navController)
            // MainScreen(navController)
+            CameraPage(navController)
 
 
         }
