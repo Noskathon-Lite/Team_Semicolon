@@ -166,7 +166,12 @@ class ListFeedbacksView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        user = request.user  # The authenticated user
-        feedback = Feedback.objects.all()  # Filter posts by the current user
-        serializer = FeedbackSerializer(feedback, many=True)  # Serialize the posts
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        user = request.user
+        if user.user_type == 'police':
+            user = request.user  # The authenticated user
+            feedback = Feedback.objects.all()  # Filter posts by the current user
+            serializer = FeedbackSerializer(feedback, many=True)  # Serialize the posts
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        else:
+            return Response({"message": "Only Police can view Feedback"}, status=status.HTTP_401_UNAUTHORIZED)
