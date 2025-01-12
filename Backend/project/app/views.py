@@ -154,12 +154,7 @@ class CreateFeedbackView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        user = request.user  # The authenticated user
-        data = request.data.copy()  # Make a mutable copy of the request data
-        data['user'] = user.name  # Set the current user's ID in the data
-
-        # Validate and save the post using the serializer
-        serializer = FeedbackSerializer(data=data)
+        serializer = FeedbackSerializer(data=request.data, context={'request': request})  # Pass context
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
