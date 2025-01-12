@@ -20,9 +20,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.surakhsit_nepal.Components.BelowNavBar
 import com.example.surakhsit_nepal.Components.TopNavBar
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
@@ -69,5 +71,13 @@ fun FeedBack(navController : NavHostController){
 
         }
     }
+
+}
+
+@Preview(showBackground = true)
+@Composable
+fun showFeedback(){
+    val navController = rememberNavController()
+    FeedBack(navController)
 
 }

@@ -5,6 +5,8 @@ import retrofit2.Call
 import com.example.surakhsit_nepal.Backend.BackendData.userData
 import com.example.surakhsit_nepal.Backend.login.LoginRequest
 import com.example.surakhsit_nepal.Backend.login.LoginResponse
+import com.example.surakhsit_nepal.feedbackTest.FeedbackRequest
+import com.example.surakhsit_nepal.feedbackTest.FeedbackResponse
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -29,4 +31,10 @@ interface ApiInterface {
     suspend fun uploadVideo(
         @Part video_file: MultipartBody.Part
     ): Response<ResponseBody>
+
+
+    @POST("create/feedback")
+    suspend fun sendFeedback(
+        @Body feedback: FeedbackRequest
+    ): Response<FeedbackResponse>
 }

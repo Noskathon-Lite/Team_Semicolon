@@ -6,8 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.surakhsit_nepal.Backend.ApiInterface
 import com.example.surakhsit_nepal.Backend.BackendObject
 import com.example.surakhsit_nepal.Backend.login.LoginRequest
+import com.example.surakhsit_nepal.Backend.login.TokenObject
+import com.example.surakhsit_nepal.feedbackTest.FeedbackRequest
 import kotlinx.coroutines.launch
 
 
@@ -69,5 +72,27 @@ class BackendViewModel(): ViewModel(){
                 onResult("Login Failed: ${e.message}")
             }
         }
+        //feedback ko lagi
+        suspend fun sendFeedback(token: String, feedback: FeedbackRequest) {
+            val retrofit = TokenObject.getRetrofit { token }
+            val service = retrofit.create(ApiInterface::class.java)
+
+            try {
+                val response = service.sendFeedback(feedback)
+                if (response.isSuccessful) {
+                    // Handle success
+                    println("Feedback sent successfully: ${response.body()?.message}")
+                } else {
+                    // Handle failure
+                    println("Error sending feedback: ${response.errorBody()?.string()}")
+                }
+            } catch (e: Exception) {
+                // Handle exception
+                e.printStackTrace()
+            }
+        }
+
+
+
     }
 }
