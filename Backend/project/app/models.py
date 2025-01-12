@@ -5,6 +5,7 @@ from django.core.files import File
 from django.contrib.auth.models import AbstractBaseUser, Group ,PermissionsMixin, BaseUserManager, UserManager
 
 # Create your models here.
+# Custom user manager
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, name, phone_number, password=None, **extra_fields):
         if not email:
@@ -51,6 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=20, unique=True)
+    groups = models.ManyToManyField('auth.Group', related_name='user_groups', blank=True)
     user_permissions = models.ManyToManyField('auth.Permission', related_name='user_permissions_set', blank=True)
     user_type = models.CharField(max_length=20, choices=USER_TYPES , default='user')
 
@@ -69,9 +71,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.name
 
 
+class Criminal(models.Model):
+    GENDER_CHOICE = (('male', 'male'),('female', 'female'),)
+    name = models.CharField(max_length=30)
+    age = models.PositiveIntegerField()
+    gender = models.CharField(max_length=10 , choices=GENDER_CHOICE)
+    case = models.CharField(max_length=30 , default='')
+    image = models.ImageField(upload_to='criminals_image/' , default='criminals_image/default.jpg')
+
+
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE ,  related_name='user_feedback')
-    title = models.CharField(max_length=20)
     content = models.TextField()
     created_at = models.DateField(auto_now_add=True)
 

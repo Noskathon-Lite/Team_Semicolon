@@ -91,4 +91,11 @@ dependencies {
     // phone number ko lagi
     implementation(libs.play.services.auth)
 
+    //datastore
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.datastore.preferences.v100)
+
+    // RxJava2 extensions for DataStore
+    implementation(libs.androidx.datastore.rxjava2)
+
 }

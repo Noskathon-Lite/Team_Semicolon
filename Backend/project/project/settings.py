@@ -101,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = "en-us"
 
 TIME_ZONE = "Asia/Kathmandu"
+TIME_ZONE = "Asia/Kathmandu"
 
 USE_I18N = True
 
@@ -145,4 +146,7 @@ AUTH_USER_MODEL = 'app.User'
 
 ALLOWED_HOSTS = ['*']
 
+import os
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
