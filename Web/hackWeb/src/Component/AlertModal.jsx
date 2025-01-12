@@ -1,6 +1,9 @@
 import React, { useRef, useState } from "react";
 import './AlertModal.css'
 import ReactModal from "react-modal";
+import { format } from 'date-fns';
+
+import OSM from '../Map/OSM'
 
 ReactModal.setAppElement("#root");
 
@@ -47,10 +50,24 @@ function AlertModal({ show, onClose, alert }) {
         {
             alert && (
                 <div className="alert-modal">
-                    <div className="alert-details-container">
+                    <div className="details-map-container">
                         <div className="alert-details">
                             <h3>Sender Info</h3>
+                            <div className="details">
+                                <span>Name: <span style={{fontWeight:"bold"}}>Jyoti Jyoshi</span></span>
+                                <span>Time: <span style={{fontWeight:"bold"}}>Jyoti Jyoshi</span></span>
+                                <span>Name: <span style={{fontWeight:"bold"}}>Jyoti Jyoshi</span></span>
+                                <span>Date: <span style={{fontWeight:"bold"}}>988123213</span></span>
+                                <span><span style={{fontWeight:"bold"}}></span></span>
+                                <span><span style={{fontWeight:"bold"}}></span></span>
+                            </div>
                             
+                        </div>
+                        <div className="map-wrapper">
+                            <h3>Incident Location</h3>
+                            <div className="map">
+                                <OSM/>
+                            </div>
                             <div className="location">
                                 <button onClick={handleMapToggleChange}>See Location</button>
                             </div>
