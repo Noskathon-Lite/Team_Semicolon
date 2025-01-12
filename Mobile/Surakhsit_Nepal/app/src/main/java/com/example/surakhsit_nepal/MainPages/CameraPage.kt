@@ -1,10 +1,15 @@
 package com.example.surakhsit_nepal.MainPages
 
 import android.Manifest
+import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -29,9 +34,12 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.NavHostController
 import com.example.surakhsit_nepal.Components.BelowNavBar
 import com.example.surakhsit_nepal.Components.TopNavBar
+import com.example.surakhsit_nepal.MainPages.videoUploader.uploadVideo
 import com.example.surakhsit_nepal.Navigation.Screens
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 
@@ -39,14 +47,40 @@ import java.io.File
 fun CameraPage(navController: NavHostController) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-
-
+    var message by remember { mutableStateOf("") }
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-
-
     var video_file by remember { mutableStateOf<File?>(null) }
     var videoUri by remember { mutableStateOf<Uri?>(null) }
     var location by remember { mutableStateOf<Location?>(null) }
+
+    // Launcher for video recording
+    val videoLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == android.app.Activity.RESULT_OK) {
+            Toast.makeText(context, "Video saved to: $videoUri", Toast.LENGTH_LONG).show()
+            message = "Video saved successfully: $videoUri"
+        } else {
+            Toast.makeText(context, "Video recording failed or canceled", Toast.LENGTH_SHORT).show()
+            message = "Video recording failed or canceled"
+        }
+    }
+
+    // Launcher for selecting a video from storage
+    val filePickerLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let {
+            // Start uploading the selected video
+            CoroutineScope(Dispatchers.IO).launch {
+                uploadVideo(context, it)
+
+            }
+        }
+    }
+
+
+
 
 
     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -64,10 +98,7 @@ fun CameraPage(navController: NavHostController) {
         }
     }
 
-    val recordVideoLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.CaptureVideo(),
-        onResult = { success ->
-            Toast.makeText(context, "Video capture success: $success", Toast.LENGTH_SHORT).show()
-        })
+
 
     Box(
         modifier = Modifier.fillMaxSize().background(Color.White)
@@ -85,10 +116,11 @@ fun CameraPage(navController: NavHostController) {
             // Capture video button
             OutlinedButton(
                 onClick = {
-//                    video_file = context.createVideoFile()
-//                    videoUri = video_file?.getUri(context = context)
-//
-//                    recordVideoLauncher.launch(videoUri)
+                    videoUri = createVideoUri(context) // Generate URI for the video
+                    val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE).apply {
+                        putExtra(MediaStore.EXTRA_OUTPUT, videoUri)
+                    }
+                    videoLauncher.launch(videoIntent)
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor),
                 shape = RoundedCornerShape(10.dp),
@@ -103,21 +135,7 @@ fun CameraPage(navController: NavHostController) {
             OutlinedButton(
                 onClick = {
 
-//                    val data = atLong(
-//                        location_longitude = "90",
-//                        location_latitude = "80",
-//                        video_file = videoUri
-////                    )
-//                    scope.launch {
-//                        val response = Backend.apiService.sendData(data)
-//                        try {
-//                            if (response.isSuccessful) {
-//                                Toast.makeText(context, "fuck uyou", Toast.LENGTH_LONG).show()
-//                            }
-//                        }catch(e:Exception){
-//                            Toast.makeText(context,"${e.message}",Toast.LENGTH_LONG).show()
-//                        }
-//                    }
+                    filePickerLauncher.launch("video/*")
                 },
                 colors = ButtonDefaults.buttonColors(backgroundColor),
                 shape = RoundedCornerShape(10.dp),
@@ -130,8 +148,23 @@ fun CameraPage(navController: NavHostController) {
     }
 }
 
-//fun uploadVideoWithLocation(context: Context, videoFile: File, location_latitude: Double, location_longitude: Double) {
-//
-//    uploadVideo(context, videoFile, location_latitude, location_longitude)
-//
-//}
+fun createVideoUri(context: Context): Uri? {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, "video_${System.currentTimeMillis()}.mp4")
+            put(MediaStore.MediaColumns.MIME_TYPE, "video/mp4")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_MOVIES)
+        }
+        context.contentResolver.insert(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, contentValues)
+    } else {
+        val videoDirectory = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES),
+            "MyAppVideos"
+        )
+        if (!videoDirectory.exists()) {
+            videoDirectory.mkdirs()
+        }
+        val videoFile = File(videoDirectory, "video_${System.currentTimeMillis()}.mp4")
+        Uri.fromFile(videoFile)
+    }
+}

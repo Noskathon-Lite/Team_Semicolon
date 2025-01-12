@@ -157,7 +157,7 @@ class CreateFeedbackView(APIView):
         serializer = FeedbackSerializer(data=request.data, context={'request': request})  # Pass context
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"message":"Thank You For Your FeedBack"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

@@ -67,10 +67,10 @@ fun Login(navController: NavHostController){
     var isPasswordVisible by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
-    val dataStoreManager = DataStoreManager(context)
+ //   val dataStoreManager = DataStoreManager(context)
 
-    val _username = dataStoreManager.getStatus
-    val sername by  dataStoreManager.getUserName.collectAsState(_username)
+//    val _username = dataStoreManager.getStatus
+//    val sername by  dataStoreManager.getUserName.collectAsState(_username)
     val scope = rememberCoroutineScope()
 
     Box(
@@ -83,7 +83,7 @@ fun Login(navController: NavHostController){
             modifier = Modifier.padding(top= 80.dp)
         ){
             Text(
-                text = "$sername",
+                text = "LOGIN",
                 fontSize = 22.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
@@ -170,7 +170,6 @@ fun Login(navController: NavHostController){
 
                                         }
                                         navController.navigate(Screens.mainScreen.route)
-
                                     }else{
                                         Toast.makeText(context, "Login failed: ${response.message()}", Toast.LENGTH_SHORT).show()
                                         Log.d("accessToken", response.message())

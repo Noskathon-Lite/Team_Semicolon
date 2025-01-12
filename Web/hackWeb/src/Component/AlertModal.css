@@ -1,69 +1,70 @@
 /* Overlay styling for ReactModal */
 .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.75); /* Dimmed background */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2; /* Ensure it's on top */
-}
-
-/* Modal content styling */
-.modal-content {
-  position: relative;
-  background: white;
-  padding: 20px;
-  width: 80%; /* Width of modal (relative to viewport width) */
-  max-width: 600px; /* Maximum width */
-  border-radius: 10px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  z-index: 1001;
-  outline: none; /* Remove focus outline */
-}
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75); /* Dimmed background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2; /* Ensure it's on top */
+  }
+  
+  /* Modal content styling */
+  .modal-content {
+    position: relative;
+    background: white;
+    padding: 20px;
+    width: 80%; /* Width of modal (relative to viewport width) */
+    max-width: 600px; /* Maximum width */
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    outline: none; /* Remove focus outline */
+  }
+  
 
 .video-player-container {
-  text-align: center;
-  margin-top: 10px;
-}
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  /* Video element styling */
+  .video-player {
+    width: 384px;
+    height: 576px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  /* Controls container */
+  .video-controls {
+    margin-top: 10px;
+  }
+  
+  /* Button styling */
+  .video-button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #2d3482;
+    color: white;
+    border: none;
+    border-radius: 4px;
+  }
 
-/* Video element styling */
-.video-player {
-  width: 384px;
-  height: 576px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-/* Controls container */
-.video-controls {
-  margin-top: 10px;
-}
-
-/* Button styling */
-.video-button {
-  padding: 10px 20px;
-  margin-right: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #2d3482;
-  color: white;
-  border: none;
-  border-radius: 4px;
-}
-
-
-/* Volume label and input */
-.volume-label {
-  font-size: 16px;
-  margin-right: 10px;
-}
-
-.volume-slider {
-  cursor: pointer;
-  width: 100px;
-}
+  
+  /* Volume label and input */
+  .volume-label {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .volume-slider {
+    cursor: pointer;
+    width: 100px;
+  }
+  
