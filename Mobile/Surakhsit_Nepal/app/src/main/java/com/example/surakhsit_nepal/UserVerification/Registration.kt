@@ -57,6 +57,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.surakhsit_nepal.Backend.BackendData.userData
 import com.example.surakhsit_nepal.Backend.BackendObject
+import com.example.surakhsit_nepal.DataStore.DataStoreManager
 import com.example.surakhsit_nepal.Navigation.Screens
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 import com.google.android.gms.auth.api.identity.GetPhoneNumberHintIntentRequest
@@ -77,6 +78,8 @@ fun Registration(navController: NavHostController){
 
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    //datatstore
+    val dataStoreManager = DataStoreManager(context)
 
     val phoneNumberHintIntentResultLauncher =
         rememberLauncherForActivityResult(
@@ -265,6 +268,10 @@ fun Registration(navController: NavHostController){
                                     val response = BackendObject.authService.registerUser(registrationData)
                                     if (response.isSuccessful) {
                                         Toast.makeText(context, "Registration successful!", Toast.LENGTH_SHORT).show()
+                                        dataStoreManager.SaveUserName(username)
+                                        dataStoreManager.SaveUserEmail(email)
+                                        dataStoreManager.SaveUserNumber(phone_number)
+                                        dataStoreManager.loginSatus(true)
                                         navController.navigate(Screens.login.route)
                                     } else {
                                         Toast.makeText(context, "Registration failed: ${response.message()}", Toast.LENGTH_SHORT).show()

@@ -3,7 +3,6 @@ package com.example.surakhsit_nepal.DataStore
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -22,15 +21,15 @@ class DataStoreManager(private val context: Context) {
 
     //get saved access token
 
-    val getAccessToken: Flow<String?> = context.dataStore.data
+    val getStatus: Flow<Boolean?> = context.dataStore.data
         .map { preferences ->
-            preferences[ACCESS_TOKEN] ?: ""
+            preferences[LOGIN_STATUS] ?:false
         }
 
     //save access token
-    suspend fun saveAccessToken(token : String){
+    suspend fun loginSatus(token : Boolean){
         context.dataStore.edit {preferences ->
-            preferences[ACCESS_TOKEN] = token
+            preferences[ACCESS_TOKEN]?: token
 
         }
     }
