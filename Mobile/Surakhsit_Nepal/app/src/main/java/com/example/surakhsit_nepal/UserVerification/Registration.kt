@@ -272,7 +272,7 @@ fun Registration(navController: NavHostController){
                                         dataStoreManager.SaveUserEmail(email)
                                         dataStoreManager.SaveUserNumber(phone_number)
                                         dataStoreManager.loginSatus(true)
-                                        navController.navigate(Screens.login.route)
+                                        navController.navigate(Screens.mainScreen.route)
                                     } else {
                                         Toast.makeText(context, "Registration failed: ${response.message()}", Toast.LENGTH_SHORT).show()
                                         Log.e("registration", "Registration failed: ${response.message()}")

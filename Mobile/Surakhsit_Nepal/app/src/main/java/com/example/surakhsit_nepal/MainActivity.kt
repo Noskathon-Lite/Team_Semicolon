@@ -1,5 +1,6 @@
 package com.example.surakhsit_nepal
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.surakhsit_nepal.MainPages.HomePage
+import com.example.surakhsit_nepal.MainPages.MainScreen
 import com.example.surakhsit_nepal.Navigation.SetUpNavigation
 import com.example.surakhsit_nepal.OnBoardingScreens.Indicator
 import com.example.surakhsit_nepal.OnBoardingScreens.OnBoardingScreen
@@ -22,13 +25,16 @@ import com.example.surakhsit_nepal.ui.theme.Surakhsit_NepalTheme
 
 class MainActivity : ComponentActivity() {
     lateinit var navController: NavHostController
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             navController = rememberNavController()
             //OnBoardingScreen()
-            SetUpNavigation(navController)
+           // SetUpNavigation(navController)
+            //HomePage(navController)
+            MainScreen(navController)
 
 
         }
