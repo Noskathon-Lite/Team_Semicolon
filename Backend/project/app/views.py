@@ -13,7 +13,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .models import User 
+from .models import User , Feedback
 from rest_framework.permissions import IsAuthenticated
 import os
 from django.http import JsonResponse
@@ -21,7 +21,7 @@ from django.views import View
 import json
 from django.core.files.storage import FileSystemStorage
 from datetime import date , timedelta
-from .serializers import UserSerializer , UserLoginSerializer , PoliceSerializer ,PoliceLoginSerializer
+from .serializers import UserSerializer , UserLoginSerializer , PoliceSerializer ,PoliceLoginSerializer , FeedbackSerializer
 from rest_framework.authentication import BasicAuthentication
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -120,3 +120,30 @@ class PoliceLoginView(APIView):
             return Response({"message": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreateFeedbackView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user  # The authenticated user
+        data = request.data.copy()  # Make a mutable copy of the request data
+        #data['user'] = 1  # Set the current user's ID in the data
+
+        # Validate and save the post using the serializer
+        serializer = FeedbackSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ListFeedbacksView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user  # The authenticated user
+        feedback = Feedback.objects.all()  # Filter posts by the current user
+        serializer = FeedbackSerializer(feedback, many=True)  # Serialize the posts
+        return Response(serializer.data, status=status.HTTP_200_OK)
