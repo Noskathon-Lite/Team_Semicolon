@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Home.css";
-import Modal from "react-modal";
-import { Link } from "react-router-dom";
+import { FaTrashRestoreAlt } from "react-icons/fa";
 import Alert from "./Alert";
 
 const Home = () => {
@@ -9,7 +8,6 @@ const Home = () => {
   const [selectedAlert, setSelectedAlert] = useState(null);
 
   const handleAlertClick = (alert) => {
-    
     setSelectedAlert(alert);
     setShowModal(true);
   };
@@ -64,17 +62,16 @@ const Home = () => {
                   {/* render feedback  from backend */}
                   {feedbacks.map((feedback, index) => (
                     <li key={index} type="number" className="feedback-list">
-                      <span> {feedback.name} </span>
-                      <span>{feedback.number} </span>
-                      {/* Adjust based on your data structure */}
+                      <div className="officer-detail">
+                        <span type="none"> {feedback.name} </span>
+                        <span type="none">{feedback.number} </span>
+                        <span type="none"><FaTrashRestoreAlt  className="trash-icon"/></span>
+                      </div>
+                     
                     </li>
                   ))}
 
-                  {/* <li type="number" className="feedback-list">
-                  {" "}
-                  feedback 1
-                </li>
-                 */}
+                 
                 </ol>
               </div>
             </div>

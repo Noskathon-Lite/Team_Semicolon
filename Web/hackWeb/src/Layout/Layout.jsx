@@ -85,6 +85,13 @@ const Layout = () => {
                       Feedback
                     </button>
                   </li>
+                  
+                  <li type="none" className="nav-item">
+                    <a to="/about" className="nav-link">
+                      <button className="tabs nav-link">Location</button>
+                    </a>
+                  </li>
+
                   <li type="none" className="nav-item">
                     <div
                       className={
@@ -96,11 +103,6 @@ const Layout = () => {
                     >
                       <IoNotifications />
                     </div>
-                  </li>
-                  <li type="none" className="nav-item">
-                    <a to="/about" className="nav-link">
-                      <div>Location</div>
-                    </a>
                   </li>
                   {/* <li type="none" className="nav-item">
                     <a to="/about" className="nav-link">
@@ -142,7 +144,7 @@ const Layout = () => {
                 {/* render feedback  from backend */}
                 {feedbacks.map((feedback, index) => (
                   <li key={index} type="number" className="feedback-list">
-                    {feedback.message}{" "}
+                    {feedback.name}{" "}
                     {feedback.subject}
                     {/* Adjust based on your data structure */}
                   </li>
@@ -170,9 +172,9 @@ export default Layout;
 
 
 const feedbacks = [
-  { message: "Kiran Aacharya", subject:"abcd" },
-  { message: "feedback 2" },
-  { message: "feedback 3" },
-  { message: "feedback 4" },
-  { message: "feedback 5" },
+  { name: "Kiran ", subject:"abcd" },
+  { name: "feedback 2" },
+  { name: "feedback 3" },
+  { name: "feedback 4" },
+  { name: "feedback 5" },
 ];
