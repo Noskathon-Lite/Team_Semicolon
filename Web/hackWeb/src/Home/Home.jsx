@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Home.css";
-import { FaTrashRestoreAlt } from "react-icons/fa";
-import Alert from "./Alert";
+import Modal from "react-modal";
+import { Link } from "react-router-dom";
+import AlertModal from "../Component/AlertModal";
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +44,7 @@ const Home = () => {
                 </ol>
               </div>
             </div>
-            <Alert
+            <AlertModal
               show={showModal}
               onClose={handleCloseModal}
               alert={selectedAlert}

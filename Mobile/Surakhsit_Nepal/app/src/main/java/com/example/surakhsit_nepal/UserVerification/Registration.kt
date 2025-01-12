@@ -268,11 +268,11 @@ fun Registration(navController: NavHostController){
                                     val response = BackendObject.authService.registerUser(registrationData)
                                     if (response.isSuccessful) {
                                         Toast.makeText(context, "Registration successful!", Toast.LENGTH_SHORT).show()
-                                        dataStoreManager.SaveUserName(username)
-                                        dataStoreManager.SaveUserEmail(email)
-                                        dataStoreManager.SaveUserNumber(phone_number)
+//                                        dataStoreManager.SaveUserName(username)
+//                                        dataStoreManager.SaveUserEmail(email)
+//                                        dataStoreManager.SaveUserNumber(phone_number)
                                         dataStoreManager.loginSatus(true)
-                                        navController.navigate(Screens.mainScreen.route)
+                                        navController.navigate(Screens.login.route)
                                     } else {
                                         Toast.makeText(context, "Registration failed: ${response.message()}", Toast.LENGTH_SHORT).show()
                                         Log.e("registration", "Registration failed: ${response.message()}")

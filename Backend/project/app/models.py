@@ -82,6 +82,7 @@ class Criminal(models.Model):
 
 class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE ,  related_name='user_feedback')
+    title = models.CharField(max_length=25 , default='')
     content = models.TextField()
     created_at = models.DateField(auto_now_add=True)
 
