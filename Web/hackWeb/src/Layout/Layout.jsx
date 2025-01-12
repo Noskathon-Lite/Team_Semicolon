@@ -22,11 +22,14 @@ const Layout = () => {
         <div className="container  ">
           <div className="logo-sn ">
             <div className="nepal-police">
-              <img
-                src="assets/img/nepal-police.png"
-                className="sn-logo-nepal-police"
-                alt="surakshit"
-              />
+                <div className="img-container">
+                    <img
+                    src="assets/img/nepal-police.png"
+                    className="sn-logo-nepal-police"
+                    alt="surakshit"
+                    />
+                </div>
+              
             </div>
             <div className="handshake-icon">
               {" "}
@@ -35,7 +38,7 @@ const Layout = () => {
 
             <div className="suraksit-nepal">
               <img
-                src="assets/img/suraksit1.png"
+                src="assets/img/snlogo.png"
                 className="sn-logo"
                 alt="surakshit"
               />
@@ -55,7 +58,7 @@ const Layout = () => {
                       }
                       onClick={() => toggleTab(1)}
                     >
-                      Tab1
+                     Home
                     </button>
                   </li>
                   <li type="none" className="nav-item ">
@@ -67,7 +70,7 @@ const Layout = () => {
                       }
                       onClick={() => toggleTab(2)}
                     >
-                      Tab2
+                      Criminal
                     </button>
                   </li>
                   <li type="none" className="nav-item">
@@ -79,7 +82,7 @@ const Layout = () => {
                       }
                       onClick={() => toggleTab(3)}
                     >
-                      Tab3
+                      Feedback
                     </button>
                   </li>
                   <li type="none" className="nav-item">
@@ -129,11 +132,47 @@ const Layout = () => {
           </div>
           <div
             className={toggleState === 3 ? "content active-content" : "content"}
-          ></div>
+          >   <div className="home-content-feedback">
+          <div className="home-feedback">
+            {/* feedback section */}
+            <div className="feedback-content">
+              <h1>Feedback</h1>
+              <hr />
+              <ol>
+                {/* render feedback  from backend */}
+                {feedbacks.map((feedback, index) => (
+                  <li key={index} type="number" className="feedback-list">
+                    {feedback.message}{" "}
+                    {feedback.subject}
+                    {/* Adjust based on your data structure */}
+                  </li>
+                ))}
+
+                {/* <li type="number" className="feedback-list">
+                {" "}
+                feedback 1
+              </li>
+               */}
+              </ol>
+            </div>
+          </div>
+         
+        </div> </div>
         </div>
+        
       </main>
     </>
   );
 };
 
 export default Layout;
+
+
+
+const feedbacks = [
+  { message: "Kiran Aacharya", subject:"abcd" },
+  { message: "feedback 2" },
+  { message: "feedback 3" },
+  { message: "feedback 4" },
+  { message: "feedback 5" },
+];
