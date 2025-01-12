@@ -1,7 +1,10 @@
 import React, { useRef, useState } from "react";
 import './AlertModal.css'
+import ReactModal from "react-modal";
 
-function AlertModal() {
+ReactModal.setAppElement("#root");
+
+function AlertModal({ show, onClose, alert }) {
   const videoRef = useRef(null); // Reference to the video element
   const [isPlaying, setIsPlaying] = useState(false); // Track play/pause state
   const [volume, setVolume] = useState(1);
@@ -26,8 +29,18 @@ function AlertModal() {
   };
 
   return (
-    <div className="alert-modal-wrapper">
-        <div className="alert-modal">
+
+    <ReactModal
+      isOpen={show}
+      onRequestClose={onClose}
+      contentLabel="Alert Detail"
+      className="modal-content"
+      overlayClassName="modal-overlay"
+    >
+        <div className="alert-modal-wrapper">
+        {
+            alert && (
+                <div className="alert-modal">
             <div className="video-player-container">
                 <video
                     ref={videoRef}
@@ -60,7 +73,14 @@ function AlertModal() {
                 <button onClick={handleMapToggleChange}>See Location</button>
             </div>
         </div>
+            )
+        }
+        
     </div>
+
+    </ReactModal>
+    
+    
   )
 }
 
