@@ -57,6 +57,7 @@ import androidx.core.os.persistableBundleOf
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.surakhsit_nepal.Components.TopNavBar
+import com.example.surakhsit_nepal.Navigation.Screens
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
@@ -134,13 +135,13 @@ fun HomePage(navController : NavHostController) {
                         modifier = Modifier.padding(start = 20.dp, top = 30.dp)
                     ) {
                         IconsImage(Icons.Default.LocationOn, "police Stations\n Nearby"){
-                            //navController.navigate(Screens.policeNearby.route)
+                            navController.navigate(Screens.policeNearby.route)
                         }
                         IconsImage(Icons.Default.Book, "Notices"){
-                           // navController.navigate(Screens.notices.route)
+                            navController.navigate(Screens.notices.route)
                         }
                         IconsImage(Icons.Default.Feedback, "Feedback"){
-                           // navController.navigate(Screens.feedback.route)
+                            navController.navigate(Screens.feedback.route)
                         }
                     }
                     Spacer(modifier = Modifier.height(20.dp))
@@ -150,11 +151,11 @@ fun HomePage(navController : NavHostController) {
                         modifier = Modifier.padding(start = 20.dp, top = 30.dp)
                     ) {
                         IconsImage(Icons.Default.ContactEmergency, "Emergency\n Numbers"){
-                           // navController.navigate(Screens.emergency_number.route)
+                            navController.navigate(Screens.emergency_number.route)
                         }
                         IconsImage(Icons.Default.Inbox, "e-Complaint"){}
                         IconsImage(Icons.Default.PersonPin," Wanted "){
-                          //  navController.navigate(Screens.wanted.route)
+                            navController.navigate(Screens.wanted.route)
                         }
                     }
                 }

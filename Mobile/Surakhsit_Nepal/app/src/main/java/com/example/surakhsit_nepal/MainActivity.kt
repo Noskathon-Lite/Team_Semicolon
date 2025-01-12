@@ -32,9 +32,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             navController = rememberNavController()
             //OnBoardingScreen()
-           // SetUpNavigation(navController)
+            SetUpNavigation(navController)
             //HomePage(navController)
-            MainScreen(navController)
+           // MainScreen(navController)
 
 
         }

@@ -26,6 +26,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ComposeCompilerApi
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -45,6 +47,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.surakhsit_nepal.DataStore.DataStoreManager
 import com.example.surakhsit_nepal.Navigation.Screens
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 
@@ -59,6 +62,12 @@ fun Login(navController: NavHostController){
     var password by remember{ mutableStateOf("") }
     var isPasswordVisible by remember { mutableStateOf(false) }
 
+    val context = LocalContext.current
+    val dataStoreManager = DataStoreManager(context)
+
+    val _username = dataStoreManager.getStatus
+    val sername by  dataStoreManager.getUserName.collectAsState(_username)
+
     Box(
         modifier = Modifier.fillMaxSize()
             .background(backgroundColor),
@@ -69,7 +78,7 @@ fun Login(navController: NavHostController){
             modifier = Modifier.padding(top= 80.dp)
         ){
             Text(
-                text = "Signup",
+                text = "$sername",
                 fontSize = 22.sp,
                 color = Color.White,
                 fontWeight = FontWeight.Bold,
@@ -141,7 +150,7 @@ fun Login(navController: NavHostController){
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Button(
-                        onClick = {},
+                        onClick = {navController.navigate(Screens.mainScreen.route)},
                         modifier = Modifier.fillMaxWidth(.8f),
                         shape = RoundedCornerShape(15.dp),
                         colors = ButtonDefaults.buttonColors(backgroundColor)
