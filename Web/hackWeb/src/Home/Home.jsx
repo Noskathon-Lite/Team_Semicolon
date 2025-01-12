@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Home.css";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
-import Alert from "./Alert";
 import AlertModal from "../Component/AlertModal";
 
 const Home = () => {
