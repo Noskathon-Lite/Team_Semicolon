@@ -72,8 +72,16 @@ class FeedbackSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source='user.name', read_only=True)
     class Meta:
         model = Feedback
-        fields = ['user_name', 'content', 'created_at']
+        fields = ['user_name', 'content', 'created_at' , 'title']
         read_only_fields = ['id', 'created_at']
+
+    def create(self, validated_data):
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            validated_data['user'] = request.user
+        else:
+            raise serializers.ValidationError({"user": "Authentication is required to create feedback."})
+        return super().create(validated_data)
 
 
 

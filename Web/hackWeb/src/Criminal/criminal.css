@@ -111,6 +111,25 @@
   button:active {
     transform: scale(1);
   }
+
+
+
+  .toggle-content{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 20px;
+  }
+  .icon{
+    width: 35px;
+    height: 25px;
+  }
+  .toggle-icon{
+    /* padding-top: 10px; */
+    width: 100%;
+    height: 100%;
+  }
   
   /* Responsive design for smaller screens */
   @media (max-width: 768px) {
