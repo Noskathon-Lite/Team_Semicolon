@@ -1,15 +1,12 @@
-
-
-import './App.css'
+import "./App.css";
+import Layout from "./Layout/Layout";
 
 function App() {
-  
-
   return (
     <>
-     <div> Basic Setup done</div>
+      <Layout />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
