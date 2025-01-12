@@ -47,6 +47,15 @@ function AlertModal({ show, onClose, alert }) {
         {
             alert && (
                 <div className="alert-modal">
+                    <div className="alert-details-container">
+                        <div className="alert-details">
+                            <h3>Sender Info</h3>
+                            
+                            <div className="location">
+                                <button onClick={handleMapToggleChange}>See Location</button>
+                            </div>
+                        </div>
+                    </div>
                     <div className="video-player-container">
                         <video
                             ref={videoRef}
@@ -76,13 +85,6 @@ function AlertModal({ show, onClose, alert }) {
                                 value={volume}
                                 onChange={handleVolumeChange}
                             />
-                        </div>
-                    </div>
-                    <div className="alert-details-container">
-                        <h3>Sender Info</h3>
-                        
-                        <div className="location">
-                            <button onClick={handleMapToggleChange}>See Location</button>
                         </div>
                     </div>
                     
