@@ -4,24 +4,24 @@ import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import AlertModal from "../Component/AlertModal";
 import { FaTrashRestoreAlt } from "react-icons/fa";
-
+import AddOfficerModal from "./AddOfficerModal";
 
 const Home = () => {
-
-
-  const [feedbacks, setFeedbacks] = useState([
-    {  id : '1' ,name: "name one", number: " 9876477428" },
-    { id : '2' , name: "name two", number: " 9876477428" },
-    { id : '3'  , name: "name three", number: " 9876477428" },
-  ]);
-  
-
+  const [showAddOfficerModal, setShowAddOfficerModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
 
+  const [feedbacks, setFeedbacks] = useState([
+    { id: "1", name: "name one", number: " 9876477428" },
+    { id: "2", name: "name two", number: " 9876477428" },
+    { id: "3", name: "name three", number: " 9876477428" },
+  ]);
+
+ 
+
   const handleTrash = (id) => {
     setFeedbacks((prevFeedbacks) =>
-     prevFeedbacks.filter((feedback) => feedback.id !== id)
+      prevFeedbacks.filter((feedback) => feedback.id !== id)
     );
   };
 
@@ -34,9 +34,22 @@ const Home = () => {
     setShowModal(false);
     setSelectedAlert(null);
   };
-  const handleAddOfficerClick = () =>{
+  const handleAddOfficerClick = () => {
+    setShowAddOfficerModal(true);
+  };
 
-  }
+  const handleCloseAddOfficerModal = () => {
+    setShowAddOfficerModal(false);
+  };
+
+  const handleAddOfficer = (officer) => {
+    setFeedbacks((prevFeedbacks) => [
+      ...prevFeedbacks,
+      { id: prevFeedbacks.length + 1, ...officer },
+    ]);
+  };
+  
+
   return (
     <>
       <div className="home">
@@ -50,7 +63,6 @@ const Home = () => {
               <div className="alert-content">
                 <h1>Recent Alert List</h1>
                 <hr />
-
                 <ol>
                   {alertlist.map((alert, index) => (
                     <li key={index} type="number" className="alert-list">
@@ -73,35 +85,41 @@ const Home = () => {
 
           {/* feedback section and criminal record section */}
 
-          
           <div className="home-content-feedback">
             <div className="home-feedback">
               {/* feedback section */}
               <div className="feedback-content">
                 <h1>On Duty Officer</h1>
                 <hr />
-                <ol>
-                  {/* render feedback  from backend */}
-                  {feedbacks.map((feedback, index) => (
-                    <li key={index} type="number" className="feedback-list">
-                      <span>{feedback.name}</span>
-                      <span>{feedback.number}</span>
-                      <span>
-                        <FaTrashRestoreAlt
-                          className="trash-icon"
-                          onClick={() => handleTrash(feedback.id)}
-                        />
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-                <button onClick={handleAddOfficerClick}>Add Officer</button>
+                <table>
+                 
+                  <tbody>
+                    {feedbacks.map((feedback, index) => (
+                      <tr key={index} className="feedback-list">
+                        <td>{index+1} {" "} </td>
+                        <td>{feedback.name}</td>
+                        <td>{feedback.number}</td>
+                        <td>
+                          <FaTrashRestoreAlt
+                            className="trash-icon"
+                            onClick={() => handleTrash(feedback.id)}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <button onClick={handleAddOfficerClick} className="add-officer">Add Officer</button>
               </div>
-             
             </div>
           </div>
         </div>
       </div>
+      <AddOfficerModal
+        show={showAddOfficerModal}
+        onClose={handleCloseAddOfficerModal}
+        onAddOfficer={handleAddOfficer}
+      />
     </>
   );
 };
