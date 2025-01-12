@@ -11,37 +11,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.surakhsit_nepal.Navigation.SetUpNavigation
+import com.example.surakhsit_nepal.OnBoardingScreens.Indicator
+import com.example.surakhsit_nepal.OnBoardingScreens.OnBoardingScreen
+import com.example.surakhsit_nepal.UserVerification.Registration
 import com.example.surakhsit_nepal.ui.theme.Surakhsit_NepalTheme
 
 class MainActivity : ComponentActivity() {
+    lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Surakhsit_NepalTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            navController = rememberNavController()
+            //OnBoardingScreen()
+            SetUpNavigation(navController)
+
+
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    Surakhsit_NepalTheme {
-        Greeting("Android")
-    }
-}
