@@ -3,6 +3,7 @@ import "./Home.css";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import AlertModal from "../Component/AlertModal";
+import {FaTrashRestoreAlt} from 'react-icons/fa'
 
 const Home = () => {
   const [showModal, setShowModal] = useState(false);
