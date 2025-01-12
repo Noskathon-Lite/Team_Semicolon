@@ -24,14 +24,12 @@ class BackendViewModel(): ViewModel(){
     private val _criminals = MutableStateFlow<List<criminalsItem>>(emptyList())
     val criminals: StateFlow<List<criminalsItem>> = _criminals
 
-    init {
-        fetchCriminals()
-    }
 
-    private fun fetchCriminals() {
+
+     fun fetchCriminals(token : String) {
         viewModelScope.launch {
             try {
-                val response = BackendObject.authService.fetchData()
+                val response = BackendObject.authService.fetchData(token)
                 Log.d("FetchCriminals", "Response: $response")
                 _criminals.value = response
             } catch (e: Exception) {

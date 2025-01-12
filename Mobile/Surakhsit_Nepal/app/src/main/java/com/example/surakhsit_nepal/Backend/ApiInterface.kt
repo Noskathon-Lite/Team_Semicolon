@@ -13,6 +13,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
@@ -21,26 +22,30 @@ interface ApiInterface {
 
     //function to register user to connect with backend
 
+    //user registration
     @POST("user/register/")
    suspend fun registerUser(@Body request : userData)  : Response<Responses>
 
-
+    //user login
     @POST("user/login/")
     suspend fun loginUser(@Body information: LoginRequest) :Response<LoginResponse>
 
+    //video ko lagi
     @Multipart
     @POST("lat/")
     suspend fun uploadVideo(
         @Part video_file: MultipartBody.Part
     ): Response<ResponseBody>
 
-
+    //feedback ko lagi
     @POST("create/feedback/")
     suspend fun sendFeedback(
         @Body feedback: FeedbackRequest
     ): Response<FeedbackResponse>
 
     //criminal ko
-    @GET("list/criminals/")
-    suspend fun fetchData(): List<criminalsItem>
+    @GET("list/criminal/")
+    suspend fun fetchData(
+        @Header("Authorization") token: String
+    ): List<criminalsItem>
 }
