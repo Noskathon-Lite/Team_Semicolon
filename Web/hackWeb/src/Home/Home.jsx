@@ -3,10 +3,27 @@ import "./Home.css";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
 import AlertModal from "../Component/AlertModal";
+import { FaTrashRestoreAlt } from "react-icons/fa";
+
 
 const Home = () => {
+
+
+  const [feedbacks, setFeedbacks] = useState([
+    {  id : '1' ,name: "name one", number: " 9876477428" },
+    { id : '2' , name: "name two", number: " 9876477428" },
+    { id : '3'  , name: "name three", number: " 9876477428" },
+  ]);
+  
+
   const [showModal, setShowModal] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
+
+  const handleTrash = (id) => {
+    setFeedbacks((prevFeedbacks) =>
+     prevFeedbacks.filter((feedback) => feedback.id !== id)
+    );
+  };
 
   const handleAlertClick = (alert) => {
     setSelectedAlert(alert);
@@ -17,6 +34,9 @@ const Home = () => {
     setShowModal(false);
     setSelectedAlert(null);
   };
+  const handleAddOfficerClick = () =>{
+
+  }
   return (
     <>
       <div className="home">
@@ -53,6 +73,7 @@ const Home = () => {
 
           {/* feedback section and criminal record section */}
 
+          
           <div className="home-content-feedback">
             <div className="home-feedback">
               {/* feedback section */}
@@ -63,18 +84,20 @@ const Home = () => {
                   {/* render feedback  from backend */}
                   {feedbacks.map((feedback, index) => (
                     <li key={index} type="number" className="feedback-list">
-                      <div className="officer-detail">
-                        <span type="none"> {feedback.name} </span>
-                        <span type="none">{feedback.number} </span>
-                        <span type="none"><FaTrashRestoreAlt  className="trash-icon"/></span>
-                      </div>
-                     
+                      <span>{feedback.name}</span>
+                      <span>{feedback.number}</span>
+                      <span>
+                        <FaTrashRestoreAlt
+                          className="trash-icon"
+                          onClick={() => handleTrash(feedback.id)}
+                        />
+                      </span>
                     </li>
                   ))}
-
-                 
                 </ol>
+                <button onClick={handleAddOfficerClick}>Add Officer</button>
               </div>
+             
             </div>
           </div>
         </div>

@@ -169,6 +169,9 @@ padding: 10px 20px;
     flex-direction: row;
     gap: 25px;
 }
+.trash-officer-detail{
+    display: none;
+}
 .trash-icon{
     position: absolute;
     display: inline;
