@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
+import Modal from "react-modal";
 import { Link } from "react-router-dom";
+import Alert from "./Alert";
 
 const Home = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedAlert, setSelectedAlert] = useState(null);
+
+  const handleAlertClick = (alert) => {
+    
+    setSelectedAlert(alert);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedAlert(null);
+  };
   return (
     <>
       <div className="home">
@@ -18,36 +33,23 @@ const Home = () => {
                 <hr />
 
                 <ol>
-                    {alertlist.map((allertname, index)=>(
-                        <li key={index} type="number" className="alert-list">
-                            {allertname.alerts}
-                        </li>
-                    ))}
+                  {alertlist.map((alert, index) => (
+                    <li key={index} type="number" className="alert-list">
+                      <button>
+                        <div onClick={() => handleAlertClick(alert)}>
+                          {alert.alerts}
+                        </div>
+                      </button>
+                    </li>
+                  ))}
                 </ol>
-                {/* <ol>
-                  <li type="number" className="alert-list">
-                    {" "}
-                    Alert 1
-                  </li>
-                  <li type="number" className="alert-list">
-                    {" "}
-                    Alert 1
-                  </li>
-                  <li type="number" className="alert-list">
-                    {" "}
-                    Alert 1
-                  </li>
-                  <li type="number" className="alert-list">
-                    {" "}
-                    Alert 1
-                  </li>
-                  <li type="number" className="alert-list">
-                    {" "}
-                    Alert 1
-                  </li>
-                </ol> */}
               </div>
             </div>
+            <Alert
+              show={showModal}
+              onClose={handleCloseModal}
+              alert={selectedAlert}
+            />
           </div>
 
           {/* feedback section and criminal record section */}
@@ -62,8 +64,8 @@ const Home = () => {
                   {/* render feedback  from backend */}
                   {feedbacks.map((feedback, index) => (
                     <li key={index} type="number" className="feedback-list">
-<span> {feedback.name} {" "} </span>
-                     <span>{feedback.number}{" "}</span> 
+                      <span> {feedback.name} </span>
+                      <span>{feedback.number} </span>
                       {/* Adjust based on your data structure */}
                     </li>
                   ))}
@@ -76,7 +78,6 @@ const Home = () => {
                 </ol>
               </div>
             </div>
-           
           </div>
         </div>
       </div>
@@ -87,18 +88,13 @@ const Home = () => {
 export default Home;
 
 const feedbacks = [
-  { name: "name one" , number:" 9876477428" },
-  { name: "name two" , number:" 9876477428" },
-  { name: "name three" , number:" 9876477428" },
- 
+  { name: "name one", number: " 9876477428" },
+  { name: "name two", number: " 9876477428" },
+  { name: "name three", number: " 9876477428" },
 ];
 
-
-
 const alertlist = [
-  { alerts: "alert 1" },
-  { alerts: "alert 2" },
-  { alerts: "alert 3" },
-  { alerts: "alert 4" },
-  { alerts: "alert 5" },
+  { id: 1, alerts: "Alert 1", details: "Details of Alert 1" },
+  { id: 2, alerts: "Alert 2", details: "Details of Alert 2" },
+  // Add more alerts as needed
 ];

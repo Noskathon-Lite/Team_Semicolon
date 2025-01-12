@@ -1,9 +1,14 @@
 import React, { useRef, useState } from "react";
 import './AlertModal.css'
+
 function AlertModal() {
   const videoRef = useRef(null); // Reference to the video element
   const [isPlaying, setIsPlaying] = useState(false); // Track play/pause state
   const [volume, setVolume] = useState(1);
+  const [mapToggle, setMapToggle] = useState(false)
+  const handleMapToggleChange = () => {
+    setMapToggle(prevState => !prevState)
+  }
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -52,7 +57,7 @@ function AlertModal() {
                 </div>
             </div>
             <div className="location">
-                <Button onClick={}>See Location</Button>
+                <button onClick={handleMapToggleChange}>See Location</button>
             </div>
         </div>
     </div>

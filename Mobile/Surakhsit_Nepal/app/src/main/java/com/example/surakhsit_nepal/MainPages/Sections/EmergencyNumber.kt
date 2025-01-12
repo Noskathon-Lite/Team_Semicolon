@@ -35,6 +35,7 @@ import com.example.surakhsit_nepal.ui.theme.backgroundColor
 
 
 
+
 @Composable
 fun EmergencyNumber(navController : NavHostController){
     Box(
