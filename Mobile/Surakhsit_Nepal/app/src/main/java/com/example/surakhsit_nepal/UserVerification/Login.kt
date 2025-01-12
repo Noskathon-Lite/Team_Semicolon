@@ -1,5 +1,7 @@
 package com.example.surakhsit_nepal.UserVerification
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +32,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,11 +50,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.surakhsit_nepal.Backend.BackendObject
+import com.example.surakhsit_nepal.Backend.login.LoginRequest
 import com.example.surakhsit_nepal.DataStore.DataStoreManager
 import com.example.surakhsit_nepal.Navigation.Screens
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
-
-
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -67,6 +71,7 @@ fun Login(navController: NavHostController){
 
     val _username = dataStoreManager.getStatus
     val sername by  dataStoreManager.getUserName.collectAsState(_username)
+    val scope = rememberCoroutineScope()
 
     Box(
         modifier = Modifier.fillMaxSize()
@@ -150,7 +155,35 @@ fun Login(navController: NavHostController){
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Button(
-                        onClick = {navController.navigate(Screens.mainScreen.route)},
+                        onClick = {
+                            val login = LoginRequest(
+                                phone_number = phone_number,
+                                password = password
+                            )
+                            scope.launch {
+                                try{
+                                    val response = BackendObject.authService.loginUser(login)
+                                    if(response.isSuccessful){
+                                        val loginResponse = response.body()
+                                        loginResponse?.let {
+                                            Log.e("nameCheck", it.user_detail.name)
+
+                                        }
+                                        navController.navigate(Screens.mainScreen.route)
+
+                                    }else{
+                                        Toast.makeText(context, "Login failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+                                        Log.d("accessToken", response.message())
+                                    }
+                                }catch(e : Exception){
+                                    Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_SHORT).show()
+
+
+                                }
+                            }
+
+                            navController.navigate(Screens.mainScreen.route)
+                                  },
                         modifier = Modifier.fillMaxWidth(.8f),
                         shape = RoundedCornerShape(15.dp),
                         colors = ButtonDefaults.buttonColors(backgroundColor)
