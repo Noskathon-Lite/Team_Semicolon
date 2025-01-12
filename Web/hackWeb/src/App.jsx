@@ -1,10 +1,16 @@
+import React from "react";
 import "./App.css";
 import Layout from "./Layout/Layout";
 
-function App() {
+
+
+
+const App = ()=> {
   return (
     <>
+      
       <Layout />
+     
     </>
   );
 }

@@ -1,0 +1,21 @@
+.map-container{
+    position: relative;
+}
+
+.map{
+    position: absolute;
+    z-index: 1;
+}
+
+.map-container  #search{
+    position:absolute;
+    top: 50px;
+    right: 40px;
+    z-index: 2;
+}
+
+
+/* left tirako route detail hatauna lai ho yo */
+.map .leaflet-routing-alternatives-container{
+    display: none;
+}

@@ -53,11 +53,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     phone_number = models.CharField(max_length=20, unique=True)
     user_permissions = models.ManyToManyField('auth.Permission', related_name='user_permissions_set', blank=True)
     user_type = models.CharField(max_length=20, choices=USER_TYPES , default='user')
-    # groups = models.ManyToManyField(
-    #     Group,
-    #     related_name='custom_user_set',  # Avoid the default 'user_set'
-    #     blank=True,
-    # )
+
     # Define additional fields
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
