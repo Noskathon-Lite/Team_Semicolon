@@ -56,13 +56,14 @@ const Home = () => {
             <div className="home-feedback">
               {/* feedback section */}
               <div className="feedback-content">
-                <h1>Feedback</h1>
+                <h1>On Duty Officer</h1>
                 <hr />
                 <ol>
                   {/* render feedback  from backend */}
                   {feedbacks.map((feedback, index) => (
                     <li key={index} type="number" className="feedback-list">
-                      {feedback.message}{" "}
+<span> {feedback.name} {" "} </span>
+                     <span>{feedback.number}{" "}</span> 
                       {/* Adjust based on your data structure */}
                     </li>
                   ))}
@@ -86,11 +87,10 @@ const Home = () => {
 export default Home;
 
 const feedbacks = [
-  { message: "feedback 1" },
-  { message: "feedback 2" },
-  { message: "feedback 3" },
-  { message: "feedback 4" },
-  { message: "feedback 5" },
+  { name: "name one" , number:" 9876477428" },
+  { name: "name two" , number:" 9876477428" },
+  { name: "name three" , number:" 9876477428" },
+ 
 ];
 
 

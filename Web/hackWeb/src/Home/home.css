@@ -156,6 +156,9 @@ padding: 10px 20px;
     text-align: left;
 }
 
+.feedback-list{
+    padding: 5px;
+}
 
 
 /* criminal section */
@@ -204,6 +207,5 @@ padding: 10px 20px;
     color: black;
     text-align: left;
 }
-
 
 

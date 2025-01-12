@@ -29,3 +29,29 @@ class UserSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
     phone_number = serializers.CharField()
     password = serializers.CharField(write_only=True)
+
+
+
+class PoliceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'name', 'phone_number', 'password']
+        extra_kwargs = {
+            'password': {'write_only': True}
+             
+        }
+
+
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        validated_data['user_type'] = 'police'
+        user = User.objects.create(**validated_data)
+        if password:
+            user.set_password(password)  # Hash the password
+            user.save()
+        return user
+
+
+class PoliceLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)

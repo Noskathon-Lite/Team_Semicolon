@@ -22,11 +22,14 @@ const Layout = () => {
         <div className="container  ">
           <div className="logo-sn ">
             <div className="nepal-police">
-              <img
-                src="assets/img/nepal-police.png"
-                className="sn-logo-nepal-police"
-                alt="surakshit"
-              />
+                <div className="img-container">
+                    <img
+                    src="assets/img/nepal-police.png"
+                    className="sn-logo-nepal-police"
+                    alt="surakshit"
+                    />
+                </div>
+              
             </div>
             <div className="handshake-icon">
               {" "}
@@ -140,6 +143,7 @@ const Layout = () => {
                 {feedbacks.map((feedback, index) => (
                   <li key={index} type="number" className="feedback-list">
                     {feedback.message}{" "}
+                    {feedback.subject}
                     {/* Adjust based on your data structure */}
                   </li>
                 ))}
@@ -166,7 +170,7 @@ export default Layout;
 
 
 const feedbacks = [
-  { message: "feedback 1" },
+  { message: "Kiran Aacharya", subject:"abcd" },
   { message: "feedback 2" },
   { message: "feedback 3" },
   { message: "feedback 4" },

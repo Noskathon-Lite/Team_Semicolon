@@ -48,6 +48,9 @@ const Criminal = () => {
                     <h3>Address: {criminal.address}</h3>
                     <h3>Age: {criminal.age}</h3>
                     <h3>Crime: {criminal.crime}</h3>
+                   <div className="toggle-content">
+                        <p>wanted:</p>
+                   </div>
                   </li>
                 </ul>
               </div>
