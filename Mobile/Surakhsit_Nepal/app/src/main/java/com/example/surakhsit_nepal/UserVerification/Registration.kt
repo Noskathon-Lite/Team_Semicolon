@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.PendingIntent
 import android.content.IntentSender
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -43,7 +44,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -53,15 +53,15 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.surakhsit_nepal.Backend.BackendData.userData
-import com.example.surakhsit_nepal.Backend.BackendObject.apiService
+import com.example.surakhsit_nepal.Backend.BackendObject
 import com.example.surakhsit_nepal.Navigation.Screens
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 import com.google.android.gms.auth.api.identity.GetPhoneNumberHintIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
+import kotlinx.coroutines.launch
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -238,32 +238,44 @@ fun Registration(navController: NavHostController){
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Button(
-                        onClick = {
-                            val registerUser = userData(
+                        onClick = {if (username.isBlank() || email.isBlank() || phone_number.isBlank() || password.isBlank() ) {
+                            Toast.makeText(context, "Please fill in all fields and agree to the terms.", Toast.LENGTH_SHORT).show()
+                            return@Button
+                        }
+                            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                                Toast.makeText(context, "Invalid email format.", Toast.LENGTH_SHORT).show()
+                                return@Button
+                            }
+                            if (password.length < 6) {
+                                Toast.makeText(context, "Password must be at least 6 characters long.", Toast.LENGTH_SHORT).show()
+                                return@Button
+                            }
+
+                            val registrationData = userData(
                                 email = email,
                                 name = username,
                                 password = password,
                                 phone_number = phone_number
-
                             )
 
-                            val call = apiService.registerUser(registerUser)
-                            call.enqueue(object : Callback<Unit> {
-                                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+
+
+                            scope.launch {
+                                try {
+                                    val response = BackendObject.authService.registerUser(registrationData)
                                     if (response.isSuccessful) {
-
-                                        println("User registered successfully")
+                                        Toast.makeText(context, "Registration successful!", Toast.LENGTH_SHORT).show()
+                                        navController.navigate(Screens.login.route)
                                     } else {
-
-                                        println("Registration failed: ${response.code()}")
+                                        Toast.makeText(context, "Registration failed: ${response.message()}", Toast.LENGTH_SHORT).show()
+                                        Log.e("registration", "Registration failed: ${response.message()}")
                                     }
-                                }
+                                } catch (e: Exception) {
 
-                                override fun onFailure(call: Call<Unit>, t: Throwable) {
-
-                                    println("Error: ${t.message}")
+                                    Toast.makeText(context, "Error: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                                    Log.e("registration", "Error during registration: ${e.localizedMessage}")
                                 }
-                            })
+                            }
 
 
                         },
