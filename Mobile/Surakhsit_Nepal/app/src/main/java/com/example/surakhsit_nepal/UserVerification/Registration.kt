@@ -50,14 +50,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.surakhsit_nepal.Backend.BackendData.userData
+import com.example.surakhsit_nepal.Backend.BackendObject.apiService
 import com.example.surakhsit_nepal.Navigation.Screens
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 import com.google.android.gms.auth.api.identity.GetPhoneNumberHintIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
+
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 @Composable
 fun Registration(navController: NavHostController){
@@ -68,8 +76,6 @@ fun Registration(navController: NavHostController){
     var isPasswordVisible by remember { mutableStateOf(false) }
 
     val context = LocalContext.current
-    val focusRequester = remember { FocusRequester() }
-
     val scope = rememberCoroutineScope()
 
     val phoneNumberHintIntentResultLauncher =
@@ -233,9 +239,31 @@ fun Registration(navController: NavHostController){
                     Spacer(modifier = Modifier.weight(1f))
                     Button(
                         onClick = {
+                            val registerUser = userData(
+                                email = email,
+                                name = username,
+                                password = password,
+                                phone_number = phone_number
 
-                          //  navController.navigate("Otp/$username/$phone_number/$email/$password")
+                            )
 
+                            val call = apiService.registerUser(registerUser)
+                            call.enqueue(object : Callback<Unit> {
+                                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                                    if (response.isSuccessful) {
+
+                                        println("User registered successfully")
+                                    } else {
+
+                                        println("Registration failed: ${response.code()}")
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<Unit>, t: Throwable) {
+
+                                    println("Error: ${t.message}")
+                                }
+                            })
 
 
                         },
@@ -273,5 +301,14 @@ fun Registration(navController: NavHostController){
 
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun ShowData(){
+    val navController = rememberNavController()
+    Registration(navController)
+}
+
+
 
 
