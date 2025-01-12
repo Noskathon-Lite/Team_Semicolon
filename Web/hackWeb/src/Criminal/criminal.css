@@ -1,0 +1,125 @@
+/* Container styles */
+.criminal-container {
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .criminal-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .criminal-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+  }
+  
+  .criminal-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  
+    width: 100%;
+    margin: 20px;
+    padding: 10px;
+  }
+  
+  /* Grid layout for the criminals */
+  .criminals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates 3 equal-width columns */
+    gap: 10px; /* Space between grid items */
+    margin: 20px 0;
+    width: 80%;
+    flex-wrap: nowrap;
+    padding: 5px;
+  }
+  
+  .criminal-row {
+    display: contents; /* Ensures row-first layout without adding extra spacing */
+  }
+  /* Individual criminal card */
+  .criminal-list {
+    background-color: #2d3482;
+    color: white;
+    padding: 20px;
+    width: 22rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .criminal-list:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Criminal image placeholder */
+  .criminal-image {
+    width: 100%;
+    height: 150px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .criminal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  /* Content inside the criminal card */
+  .criminal-list-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
+  
+  .criminal-list-item h3 {
+    margin: 8px 0;
+    font-size: 1rem;
+  }
+  
+  /* Button styles */
+  button {
+    display: inline-block;
+    background-color: #2d3482;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #1c245e;
+    transform: scale(1.05);
+  }
+  
+  button:active {
+    transform: scale(1);
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .criminals {
+      grid-template-columns: repeat(
+        2,
+        1fr
+      ); /* Adjust to 2 columns for smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .criminals {
+      grid-template-columns: 1fr; /* Adjust to 1 column for very small screens */
+    }
+  }
+  

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import "./layout.css";
+
 import { IoNotifications } from "react-icons/io5";
+import Home from "../Home/Home";
+import Criminal from "../Criminal/Criminal";
+import { FaRegHandshake } from "react-icons/fa";
+// import Criminal from "../Criminal/Criminal";
+// import { CgProfile } from "react-icons/cg";
 
 const Layout = () => {
   const [toggleState, setToggleState] = useState(1);
@@ -15,16 +21,25 @@ const Layout = () => {
       <header id="header" className="header ">
         <div className="container  ">
           <div className="logo-sn ">
-            <img
-              src="assets/img/nepal-police.png"
-              className="sn-logo-nepal-police"
-              alt="surakshit"
-            />
-            <img
-              src="assets/img/snlogo.png"
-              className="sn-logo"
-              alt="surakshit"
-            />
+            <div className="nepal-police">
+              <img
+                src="assets/img/nepal-police.png"
+                className="sn-logo-nepal-police"
+                alt="surakshit"
+              />
+            </div>
+            <div className="handshake-icon">
+              {" "}
+              <FaRegHandshake className="handshake" />
+            </div>
+
+            <div className="suraksit-nepal">
+              <img
+                src="assets/img/suraksit1.png"
+                className="sn-logo"
+                alt="surakshit"
+              />
+            </div>
           </div>
 
           <div className="navbar-container">
@@ -40,7 +55,7 @@ const Layout = () => {
                       }
                       onClick={() => toggleTab(1)}
                     >
-                      Home
+                      Tab1
                     </button>
                   </li>
                   <li type="none" className="nav-item ">
@@ -52,7 +67,7 @@ const Layout = () => {
                       }
                       onClick={() => toggleTab(2)}
                     >
-                      Criminals
+                      Tab2
                     </button>
                   </li>
                   <li type="none" className="nav-item">
@@ -105,12 +120,12 @@ const Layout = () => {
           <div
             className={toggleState === 1 ? "content active-content" : "content"}
           >
-            {/* <Home /> */} Home
+            <Home />
           </div>
           <div
             className={toggleState === 2 ? "content active-content" : "content"}
           >
-            {/* <Criminal /> */} Criminal
+            <Criminal />
           </div>
           <div
             className={toggleState === 3 ? "content active-content" : "content"}

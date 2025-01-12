@@ -1,0 +1,209 @@
+.home{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.home-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 10px;
+}
+
+/* first section of home "alert + Nepal police logo */
+
+.home-content-alert{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 20%;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+/* home page logo section Nepal Police */
+/* .home-content-alert .home-logo{
+    display: flex;
+    justify-content: flex-start;
+    width: 35%;
+    height: 50%;
+    margin: 0;
+    padding: 10px;
+    margin-left: 10%;
+} */
+.home-content-alert .home-logo img{
+    display: flex;
+    justify-items: center;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+   
+}
+
+/* alert section css */
+
+.home-alert{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 65%;
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 15px;
+    box-shadow:  4px 2px 4px rgb(240, 232, 232);
+    background-color: white;
+   
+   
+}
+
+.alert-content{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 20px;
+    padding: 10px 30px;
+    width: 100%;
+}
+
+.alert-content h1{
+    margin: 10px;
+    padding: 10px;
+    font-size: 2em;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+}
+
+
+.alert-content ol {
+    margin: 15px;
+    padding: 10px;
+    
+    
+}
+.alert-content .alert-list{
+padding: 10px 20px;
+    font-size: 1.25em;
+    font-weight: 400;
+    color: black;
+    text-align: left;
+}
+
+
+/* feedback section */
+
+.home-content-feedback{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10%;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+}
+
+.home-feedback{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 65%;
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 15px;
+    box-shadow: 4px  4px  rgb(242, 232, 232);
+    opacity: 1;
+    background-color: white;
+   
+}
+.feedback-content{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 20px;
+    padding: 10px 30px;
+    width: 100%;
+}
+
+
+
+.feedback-content h1{
+    margin: 10px;
+    padding: 10px;
+    font-size: 2em;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+}
+
+.feedback-content ol {
+    margin: 15px;
+    padding: 10px;
+    
+    
+}
+.feedback-content .feedback-list{
+padding: 10px 20px;
+    font-size: 1.25em;
+    font-weight: 400;
+    color: black;
+    text-align: left;
+}
+
+
+
+/* criminal section */
+.home-criminal-record{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    width: 65%;
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 15px;
+    box-shadow:  4px 2px 4px rgb(240, 232, 232);
+    background-color: white;
+   
+}
+
+
+.criminal-content{
+    display: flex;
+    flex-direction: column;
+    margin: 5px 20px;
+    padding: 10px 30px;
+    width: 100%;
+}
+
+.criminal-content h1{
+    margin: 10px;
+    padding: 10px;
+    font-size: 2em;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+}
+
+.criminal-content ol {
+    margin: 15px;
+    padding: 10px;
+    
+    
+}
+.criminal-content .criminal-list{
+padding: 10px 20px;
+    font-size: 1.25em;
+    font-weight: 400;
+    color: black;
+    text-align: left;
+}
+
+
+
