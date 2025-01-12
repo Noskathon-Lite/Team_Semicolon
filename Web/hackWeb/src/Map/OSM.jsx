@@ -16,7 +16,7 @@ function OSM() {
   return (
     <div className="map-container">
         {/* <input type="text" id="search" placeholder="Search for places" /> */}
-        <MapContainer className='map' center={position} zoom={15} scrollWheelZoom={true} style={{ width: '100%', height: '100vh' }}>
+        <MapContainer className='map' center={position} zoom={15} scrollWheelZoom={true} style={{ width: '830px', height: '515px' }}>
             <TileLayer
             attribution='&copy; Blood Sewa Team'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
