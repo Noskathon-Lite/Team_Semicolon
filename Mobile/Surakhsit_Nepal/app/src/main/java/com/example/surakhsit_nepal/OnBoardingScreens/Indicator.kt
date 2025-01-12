@@ -16,13 +16,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.surakhsit_nepal.ui.theme.backgroundColor
+import com.example.surakhsit_nepal.ui.theme.navyBlue
 
 
 @Composable
 fun Indicator(
     totalPages : Int,
     currentPage : Int,
-    SelectedColor : Color = Color.Blue,
+    SelectedColor : Color = navyBlue,
     UnselectedColor : Color = Color.White
 ){
     Row(

@@ -11,7 +11,7 @@
   }
   
   .header {
-
+    /* background-color: #fff0f7; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +21,7 @@
     transition: all 0.5s;
     /* z-index: 990; */
     width: 100%;
-    height: 275px;
+    height: 415px;
     display: flex;
     box-sizing: border-box;
     
@@ -30,32 +30,43 @@
 
   .container{
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     flex-direction: column;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     box-sizing: border-box;
     width: 100%;
-    margin-top: 5px;
-    padding: 10px;
+    height:100%;
+    /* margin-top: 5px;
+    padding: 10px; */
    
   }
   
   .header .logo-sn{
     display: flex;
     justify-content: flex-start;
-    align-content: center;
-    width: 35%;
-    height: 50%;
+    align-items: center;
+    margin: 5px;
+    /* width: 35%; */
+   height: 375;
+   gap: 20px;
+    flex: 1;
   }
-  .header .sn-logo-nepal-police {
+    .nepal-police{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    max-width: 35%;
+    max-height: 40%;
+  }
+ .nepal-police .sn-logo-nepal-police {
     display: flex;
     justify-content: flex-start;
     align-self: center;
     padding: 10px;
    margin-left: 20px;
-    max-width: 35%;
-    max-height: 50%;
+    
   }
   .header .sn-logo {
     /* display: flex;
@@ -65,15 +76,28 @@
     max-height: 150px; */
     display: flex;
     justify-content: flex-start;
-    max-width: 35%;
-    max-height: 50%;
+    /* max-width: 100%; */
+    height: 250px;
     margin: 0;
     padding: 10px;
     margin-left: 10%;
   }
+  .handshake{
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin-left: 50px;
+    width: 150px;
+    height: 180px;
+  }
 
-  .navbar-container{
+  .header .navbar-container{
     position: relative;
+    margin: 0px !important;
+    padding: 0px;
+    
+
   }
   
   nav {
@@ -81,8 +105,10 @@
     justify-content: flex-end;
     width: 100%;
     z-index: 1;
-    height: 60px;
+  
+   
   }
+
   .navbar ul {
     display: flex;
     align-items: center;
@@ -97,12 +123,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 0 10px 30px;
+    padding: 0px 15px;
     font-family: var(--font-secondary);
     font-size: 16px;
     font-weight: 500;
     color: black;
-    white-space: nowrap;
+    white-space: wrap;
     transition: 0.3s;
   }
   
@@ -112,17 +138,21 @@
     font-family: var(--font-primary);
     font-weight: 550;
     font-size: 20px;
+     height: 100%;
   }
+
   .nav-item .nav-link:hover {
-    color: white !important;
-    text-decoration: underline;
+    color: #003b78 !important;
+   background-color: white;
+    /* text-decoration: underline; */
     font-family: var(--font-secondary);
     font-size: 20px;
   }
   .nav-item .nav-link:active {
-    color: white!important;
+    color: #003b78!important;
     font-family: var(--font-secondary);
     font-size: 20px;
+
   }
   .nav-link:focus {
     /* color: #003b78 !important  ; */
@@ -138,7 +168,7 @@
     color: white;
     font-weight: bold;
     font-size: 20px;
-    margin-top: 10px;
+    
     margin-bottom: 10px;
     padding: 25px, 25px;
     margin-right: 50px;
@@ -148,11 +178,12 @@
   .btn a:hover {
     text-decoration: underline;
     background-color: rgb(100, 100, 13);
-    color: white;
+    color: #003b78;
   }
   .active-tabs{
-    background-color: #003b78;
-    color: white;
+    /* background-color: white; */
+    color: #003b78;
+   
   }
   
   .content{
