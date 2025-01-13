@@ -4,7 +4,11 @@ import { FaToggleOn, FaToggleOff } from "react-icons/fa";
 import AddCriminalModal from "./AddCriminal";
 
 const Criminal = () => {
-  const [criminals, setCriminals] = useState([]);
+  const [criminals, setCriminals] = useState(() => {
+    // Retrieve criminals from local storage or initialize with an empty array
+    const savedCriminals = localStorage.getItem("criminals");
+    return savedCriminals ? JSON.parse(savedCriminals) : [];
+  });
   const [showAddCriminalModal, setShowAddCriminalModal] = useState(false);
 
   const handleClick = (id) => {
@@ -26,53 +30,24 @@ const Criminal = () => {
   };
 
   const handleAddCriminal = (newCriminal) => {
-    setCriminals((prevCriminals) => [
-      ...prevCriminals,
-      { id: prevCriminals.length + 1, ...newCriminal },
-    ]);
+    const newCriminalWithId = { id: criminals.length + 1, ...newCriminal };
+    const updatedCriminals = [...criminals, newCriminalWithId];
+    setCriminals(updatedCriminals);
+    localStorage.setItem("criminals", JSON.stringify(updatedCriminals)); // Save to local storage
     setShowAddCriminalModal(false);
   };
 
+  const handleClearCriminals = () => {
+    localStorage.removeItem("criminals"); // Remove criminals from local storage
+    setCriminals([]); // Clear the state
+  };
+
   useEffect(() => {
-    // Simulated data fetching
-    const fetchData = async () => {
-      const data = [
-        {
-          id: 1,
-          name: "John Doe",
-          address: "123 Main St",
-          age: 30,
-          crime: "Theft",
-          isWanted: false,
-        },
-        {
-          id: 2,
-          name: "Jane Smith",
-          address: "456 Maple Ave",
-          age: 25,
-          crime: "Fraud",
-          isWanted: false,
-        },
-        {
-          id: 3,
-          name: "Mark Johnson",
-          address: "789 Oak Blvd",
-          age: 40,
-          crime: "Burglary",
-          isWanted: false,
-        },
-        {
-          id: 4,
-          name: "Lucy Brown",
-          address: "321 Pine St",
-          age: 35,
-          crime: "Arson",
-          isWanted: false,
-        },
-      ];
-      setCriminals(data);
-    };
-    fetchData();
+    // Retrieve criminals from local storage on component mount
+    const savedCriminals = localStorage.getItem("criminals");
+    if (savedCriminals) {
+      setCriminals(JSON.parse(savedCriminals));
+    }
   }, []);
 
   // Function to divide data into chunks of 3
@@ -101,7 +76,7 @@ const Criminal = () => {
                     <ul>
                       <li type="none" className="criminal-list-item">
                         <h3>Name: {criminal.name}</h3>
-                        <h3>Gender: {criminal.address}</h3>
+                        <h3>Gender: {criminal.gender}</h3>
                         <h3>Age: {criminal.age}</h3>
                         <h3>Crime: {criminal.crime}</h3>
                         <div className="toggle-content">
@@ -130,6 +105,7 @@ const Criminal = () => {
       <button onClick={handleAddCriminalClick} className="add-criminal">
         Add criminal
       </button>
+     
       {showAddCriminalModal && (
         <AddCriminalModal
           show={showAddCriminalModal}

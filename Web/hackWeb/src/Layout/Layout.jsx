@@ -132,11 +132,11 @@ const Layout = () => {
                     </button>
                   </li>
 
-                  <li type="none" className="nav-item">
+                  {/* <li type="none" className="nav-item">
                     <a to="/about" className="nav-link">
                       <button className="tabs nav-link">Location</button>
                     </a>
-                  </li>
+                  </li> */}
 
                   {/* <li type="none" className="nav-item notification">
                     {unreadCount > 0 && (

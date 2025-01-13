@@ -11,23 +11,18 @@ const Home = () => {
   const [showAddOfficerModal, setShowAddOfficerModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
-
+const[loading, setLoading] = useState(false);
   const [alertList, setAlertList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [officers, setOfficers] = useState([]);
+  // 
 
   
 
-  // const [feedbacks, setFeedbacks] = useState([
-  //   { id: "1", name: "name one", number: " 9876477428" },
-  //   { id: "2", name: "name two", number: " 9876477428" },
-  //   { id: "3", name: "name three", number: " 9876477428" },
-  // ]);
+  const [officers, setOfficers] = useState(() => {
+    // Retrieve officers from local storage or initialize with an empty array
+    const savedOfficers = localStorage.getItem("officers");
+    return savedOfficers ? JSON.parse(savedOfficers) : [];
+  });
 
-  
-
- 
 
   const handleTrash = (id) => {
     setOfficers((prevFeedbacks) =>
@@ -53,12 +48,31 @@ const Home = () => {
   };
 
   const handleAddOfficer = (newOfficer) => {
-    setOfficers((prevOfficers) => [
-      ...prevOfficers,
-      { id: prevOfficers.length + 1, ...newOfficer },
-    ]);
+    const updatedOfficers = [
+      ...officers,
+      { id: officers.length + 1, ...newOfficer },
+    ];
+    setOfficers(updatedOfficers);
+    localStorage.setItem("officers", JSON.stringify(updatedOfficers)); // Save to local storage
     setShowAddOfficerModal(false);
   };
+
+  useEffect(() => {
+    // Retrieve officers from local storage on component mount
+    const savedOfficers = localStorage.getItem("officers");
+    if (savedOfficers) {
+      setOfficers(JSON.parse(savedOfficers));
+    }
+  }, []);
+
+
+  // const handleAddOfficer = (newOfficer) => {
+  //   setOfficers((prevOfficers) => [
+  //     ...prevOfficers,
+  //     { id: prevOfficers.length + 1, ...newOfficer },
+  //   ]);
+  //   setShowAddOfficerModal(false);
+  // };
 
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MjgzNDYxLCJpYXQiOjE3MzY3NDc0NjEsImp0aSI6ImVkNWJhMGNjN2I0NTRmZjQ5MDAxYWYyMjVjYTVkMGQyIiwidXNlcl9pZCI6M30.9ufWjo6vmET7eGB7j_cuz0TsQbTaxeMWoTWZcNC6py0";

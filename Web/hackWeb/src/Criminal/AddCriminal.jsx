@@ -4,11 +4,12 @@ import Modal from "react-modal";
 import { IoClose } from "react-icons/io5";
 import "./addCriminal.css";
 
+
 ReactModal.setAppElement("#root");
 
 const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
   const [name, setName] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("Male");
   const [age, setAge] = useState("");
   const [crime, setCrime] = useState("");
   const [isWanted, setIsWanted] = useState(false);
@@ -52,7 +53,7 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
                 <input
                   type="radio"
                   name="gender"
-                  value="Male"
+                  value={gender}
                   checked={gender === "Male"}
                   onChange={(e) => setGender(e.target.value)}
                   
@@ -63,7 +64,7 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
                 <input
                   type="radio"
                   name="gender"
-                  value="Female"
+                  value={gender}
                   checked={gender === "Female"}
                   onChange={(e) => setGender(e.target.value)}
                   
