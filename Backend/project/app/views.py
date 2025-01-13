@@ -254,3 +254,72 @@ class VideoUploadView(APIView):
             })
         else:
             return JsonResponse({'error': 'Not authorized to upload videos'}, status=403)
+
+
+class ListVideosAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        video_dir = os.path.join(settings.MEDIA_ROOT, 'videos')
+        if os.path.exists(video_dir):
+            videos = [
+                video for video in os.listdir(video_dir)
+                if os.path.isfile(os.path.join(video_dir, video))
+            ]
+            return Response({'videos': videos})
+        return Response({'error': 'Directory not found'}, status=404)
+
+
+
+
+class ListFramesAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Get the path to the detected_frames folder
+        frames_directory = os.path.join(settings.MEDIA_ROOT, 'detected_frames')
+
+        # List all image files in the detected_frames folder
+        frame_files = []
+        if os.path.exists(frames_directory):
+            for filename in os.listdir(frames_directory):
+                if filename.endswith(('.jpg', '.jpeg', '.png')):  # Filter image files
+                    frame_url = os.path.join('media', 'detected_frames', filename)  # Create URL
+                    frame_files.append(frame_url)
+
+        return Response({'frame_files': frame_files})
+
+
+class AllVideosInfoView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+
+        # Retrieve all videos uploaded by the user
+        videos = ProcessedVideo.objects.filter(user=user).prefetch_related('frames')
+
+        # Build the response
+        videos_data = []
+        for video in videos:
+
+            # Add video metadata
+            videos_data.append({
+                
+                'sender_name': video.user.name,
+                'video_url': video.video_file.url,
+                'location': {
+                    'longitude': video.location_longitude,
+                    'latitude': video.location_latitude,
+                },
+                'frames': [
+                    {
+                        'frame_url': frame.frame_file.url,
+                        'timestamp': frame.timestamp
+                    }
+                    for frame in video.frames.all()
+                ],
+                'processed_frames_path': video.processed_frames_path,
+            })
+
+        return JsonResponse({'videos': videos_data}, safe=False, status=200)

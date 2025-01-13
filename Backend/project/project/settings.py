@@ -15,7 +15,7 @@ SECRET_KEY = "django-insecure-g-urh(ftd#nwx_ewek@^in8k2_pcam)&7_29n%qe9!+gy#2(v0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -144,7 +144,8 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'app.User'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*',
+]
 
 import os
 

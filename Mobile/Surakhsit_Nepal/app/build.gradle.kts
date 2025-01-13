@@ -98,4 +98,15 @@ dependencies {
     // RxJava2 extensions for DataStore
     implementation(libs.androidx.datastore.rxjava2)
 
+    //map ko lagi
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.play.services.maps)
+    implementation(libs.play.services.location) //live location ko lagi
+
+
+    implementation(libs.osmdroid.osmdroid.android)
+    implementation(libs.ui)
+
+
+
 }

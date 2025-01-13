@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object BackendObject {
 
-    val BASE_URL = "http://192.168.23.8:8000/api/"
+    val BASE_URL = "http://192.168.23.44:8000/api/"
 
     val client = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {

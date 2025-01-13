@@ -32,13 +32,14 @@ interface ApiInterface {
     suspend fun loginUser(@Body information: LoginRequest) :Response<LoginResponse>
 
     //video ko lagi
+
     @Multipart
     @POST("upload/")
     suspend fun uploadVideo(
         @Header("Authorization") token: String,
         @Part video: MultipartBody.Part,
-        @Part("latitude") latitude: RequestBody,
-        @Part("longitude") longitude: RequestBody
+        @Part("location_latitude") latitude: RequestBody,
+        @Part("location_longitude") longitude: RequestBody
     ): Response<ResponseBody>
 
     //feedback ko lagi
