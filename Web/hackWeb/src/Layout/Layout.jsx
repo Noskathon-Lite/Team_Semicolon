@@ -99,7 +99,7 @@ const Layout = () => {
                           ? "tabs active-tabs nav-link"
                           : "tabs nav-link"
                       }
-                      onClick={() => toggleTab(1)}
+                      onClick={() => toggleTab(4)}
                     >
                       <IoNotifications />
                     </div>
