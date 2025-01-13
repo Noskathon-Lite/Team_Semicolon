@@ -29,9 +29,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.surakhsit_nepal.Components.BelowNavBar
 import com.example.surakhsit_nepal.Components.TopNavBar
 import com.example.surakhsit_nepal.MainPages.videoUploader.uploadVideo
@@ -111,7 +113,7 @@ fun CameraPage(navController: NavHostController) {
 //                navController.navigate(Screens.mainScreen.route)
             }
 
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier.height(140.dp))
 
             // Capture video button
             OutlinedButton(
@@ -167,4 +169,12 @@ fun createVideoUri(context: Context): Uri? {
         val videoFile = File(videoDirectory, "video_${System.currentTimeMillis()}.mp4")
         Uri.fromFile(videoFile)
     }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun viewShow(){
+    val navController = rememberNavController()
+    CameraPage(navController)
 }

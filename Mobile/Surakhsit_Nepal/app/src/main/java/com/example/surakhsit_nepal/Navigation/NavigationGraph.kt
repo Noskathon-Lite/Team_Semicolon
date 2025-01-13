@@ -34,7 +34,7 @@ fun SetUpNavigation(navController: NavHostController) {
     if (checkStatus == null) {
         LoadingScreen()
     } else {
-        val startDestination = if(checkStatus == true) Screens.mainScreen.route else Screens.registration.route
+        val startDestination = if(checkStatus == true) Screens.mainScreen.route else Screens.OnBoarding.route
 
 
         NavHost(
