@@ -1,0 +1,170 @@
+
+
+@media (max-width: 500px) {
+    .login-form {
+      width: 100%;
+    }
+  }
+
+  
+
+
+ *{
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+header {
+    margin: 10px;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background: hwb(216 94% 4%);
+    color: #2d3482 ;
+} 
+
+header .container {
+    margin: 50px 50px 50px 20px;
+   padding-top: 90px;
+   padding-bottom: 10px;
+    display: flex-box;
+}
+
+
+
+
+.row {
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px;
+    flex-wrap: wrap;
+}
+
+
+.text-left {
+    flex: 1;
+    justify-content: left;
+    padding-right: 24px;
+    padding-top: 50px;
+    
+} 
+.text-right{
+    flex: 1;
+   float: right;
+}
+div{
+    display: block;
+}
+
+
+
+h3 {
+    font-size: 28px;
+    font-weight: 400;
+    margin-top: -10px;
+    margin-left: 20px;
+    letter-spacing: 0.2px;
+
+
+}
+
+.img {
+
+    height: 200;
+    width: 250;
+    padding-bottom:20px ;
+} 
+
+ form {
+    margin:20px;
+    padding-top: 30px;
+    width: 496px;
+    background: #fff;
+    border-radius: 8px;
+    margin-top: -50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    padding: 20px 0 28px;
+} 
+.form-label {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.form_body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0 12px;
+    gap: 15px;
+}
+
+form .login-input {
+    flex: 1;
+    border: 2px solid  #979cdd ;
+    font-size: 17px;
+    border-radius: 1px;
+    color: #1d2129;
+    /* outline-color: #2d3482 ; */
+    padding: 14px 16px;
+
+}
+.text-head{
+    color:#2d3482 ;
+}
+
+
+
+.login {
+
+    background-color: #2d3482 ;
+    font-size: 20px;
+    color: #fff;
+    line-height: 48px;
+    padding: 0 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    letter-spacing: 0.25;
+    width: 100%;
+}
+
+p{
+    font-size: 17px;
+    color: #2d3482 ;
+   
+    text-align: center;
+}
+
+.forget:hover{
+    
+    text-decoration: underline;
+}
+
+hr{
+    background-color:#000610 ;
+    height: 0.6px;
+}
+
+
+.create{
+   
+    background-color: #42b72a;
+    font-size: 17px;
+    cursor: pointer;
+    color: #fff;
+    height: 35px;
+    width: 192px;
+    letter-spacing: 0.25;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    align-self: center;
+
+}  

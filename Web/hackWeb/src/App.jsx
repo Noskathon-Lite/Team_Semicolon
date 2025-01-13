@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { BrowserRouter as Router , Route , Routes } from "react-router-dom";
 import Layout from "./Layout/Layout";
+import Login from "./Login/Login";
 
 
 
@@ -11,8 +12,9 @@ const App = ()=> {
     <>
     <Router>
       <Routes>
-        <Route path="/" element={<Layout/>}/>
-       
+        <Route path="/" element={<Login/>}>
+        <Route path="layout" element={<Layout/>}/>
+       </Route>
 
       </Routes>
     </Router>
