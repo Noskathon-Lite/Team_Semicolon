@@ -10,5 +10,6 @@ sealed class Screens(val route : String){
     object policeNearby : Screens(route = "PoliceStation")
     object wanted : Screens(route = "WantedList")
     object login : Screens(route = "Login")
+    object nearByPolice : Screens(route = "NearByPolice")
 
 }
