@@ -41,8 +41,13 @@
   }
   .details-map-container .alert-details .details{
     display: flex;
+    flex-direction: row;
+    gap: 90px;
+  }
+  .side-details{
+    display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 3px;
   }
   .details-map-container .alert-details span{
     color: black;
