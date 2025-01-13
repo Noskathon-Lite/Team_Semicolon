@@ -11,7 +11,12 @@ const Home = () => {
   const [showAddOfficerModal, setShowAddOfficerModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
-  const [officers, setOfficers] = useState([]);
+
+  const [alertList, setAlertList] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  
 
   // const [feedbacks, setFeedbacks] = useState([
   //   { id: "1", name: "name one", number: " 9876477428" },
@@ -53,6 +58,37 @@ const Home = () => {
     ]);
     setShowAddOfficerModal(false);
   };
+
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MjgzNDYxLCJpYXQiOjE3MzY3NDc0NjEsImp0aSI6ImVkNWJhMGNjN2I0NTRmZjQ5MDAxYWYyMjVjYTVkMGQyIiwidXNlcl9pZCI6M30.9ufWjo6vmET7eGB7j_cuz0TsQbTaxeMWoTWZcNC6py0";
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch("http://192.168.23.44:8000/api/all", {
+            method: "GET", // or "POST" or other HTTP methods as needed
+            headers: {
+              "Authorization": `Bearer ${token}`, // Include the Authorization header
+              "Content-Type": "application/json", // Optional, based on your API
+            },
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+  
+          const result = await response.json();
+          setAlertList(result);
+          console.log(result)
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, [token]);
   
 
   return (
@@ -69,7 +105,7 @@ const Home = () => {
                 <h1>Recent Alert List</h1>
                 <hr />
                 <ol>
-                  {alertlist.map((alert, index) => (
+                  {alertList.map((alert, index) => (
                     <li key={index} type="number" className="alert-list">
                       <button>
                         <div onClick={() => handleAlertClick(alert)}>
@@ -137,10 +173,4 @@ const feedbacks = [
   { name: "name one", number: " 9876477428" },
   { name: "name two", number: " 9876477428" },
   { name: "name three", number: " 9876477428" },
-];
-
-const alertlist = [
-  { id: 1, alerts: "Alert 1", details: "Details of Alert 1" },
-  { id: 2, alerts: "Alert 2", details: "Details of Alert 2" },
-  // Add more alerts as needed
 ];
