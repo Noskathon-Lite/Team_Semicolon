@@ -52,31 +52,37 @@ fun CameraPage(navController: NavHostController) {
     var message by remember { mutableStateOf("") }
     val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
     var video_file by remember { mutableStateOf<File?>(null) }
-    var videoUri by remember { mutableStateOf<Uri?>(null) }
     var location by remember { mutableStateOf<Location?>(null) }
 
-    // Launcher for video recording
+    //video ko lagi
+    var videoUri by remember { mutableStateOf<Uri?>(null) }
+    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MjM4NjY3LCJpYXQiOjE3MzY3MDI2NjcsImp0aSI6ImIzOTQ0M2M2ZmY2ZDQ2ZDk4YzVkOWVkN2EzYzZmNDUyIiwidXNlcl9pZCI6MX0.h6spFQ38T0LGD74k_LDvEYtOWvLcNKHMZ64JNazE-so"
+    val latitude = "12.345678"
+    val longitude = "98.765432"
+
+    // video recording garne kaam yesle garxa
     val videoLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == android.app.Activity.RESULT_OK) {
             Toast.makeText(context, "Video saved to: $videoUri", Toast.LENGTH_LONG).show()
-            message = "Video saved successfully: $videoUri"
+            CoroutineScope(Dispatchers.IO).launch {
+                videoUri?.let {
+                    uploadVideo(context, it, token, latitude, longitude)
+                }
+            }
         } else {
             Toast.makeText(context, "Video recording failed or canceled", Toast.LENGTH_SHORT).show()
-            message = "Video recording failed or canceled"
         }
     }
 
-    // Launcher for selecting a video from storage
+    // storage bata video lyauna laii
     val filePickerLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri ->
         uri?.let {
-            // Start uploading the selected video
             CoroutineScope(Dispatchers.IO).launch {
-                uploadVideo(context, it)
-
+                uploadVideo(context, it, token, latitude, longitude)
             }
         }
     }
@@ -118,7 +124,7 @@ fun CameraPage(navController: NavHostController) {
             // Capture video button
             OutlinedButton(
                 onClick = {
-                    videoUri = createVideoUri(context) // Generate URI for the video
+                    videoUri = createVideoUri(context)
                     val videoIntent = Intent(MediaStore.ACTION_VIDEO_CAPTURE).apply {
                         putExtra(MediaStore.EXTRA_OUTPUT, videoUri)
                     }
@@ -163,9 +169,7 @@ fun createVideoUri(context: Context): Uri? {
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES),
             "MyAppVideos"
         )
-        if (!videoDirectory.exists()) {
-            videoDirectory.mkdirs()
-        }
+        if (!videoDirectory.exists()) videoDirectory.mkdirs()
         val videoFile = File(videoDirectory, "video_${System.currentTimeMillis()}.mp4")
         Uri.fromFile(videoFile)
     }

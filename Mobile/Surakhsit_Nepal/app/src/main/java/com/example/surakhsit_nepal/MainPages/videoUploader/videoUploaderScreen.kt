@@ -17,20 +17,20 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Composable
-fun VideoUploaderScreen(context: Context) {
-    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        uri?.let {
-            CoroutineScope(Dispatchers.IO).launch {
-                uploadVideo(context, it)
-            }
-        }
-    }
-
-    Button(
-        onClick = { launcher.launch("video/*")},
-        modifier = Modifier.padding(top = 200.dp)
-    ){
-        Text("Upload Video")
-    }
-}
+//@Composable
+//fun VideoUploaderScreen(context: Context) {
+//    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+//        uri?.let {
+//            CoroutineScope(Dispatchers.IO).launch {
+//                uploadVideo(context, it)
+//            }
+//        }
+//    }
+//
+//    Button(
+//        onClick = { launcher.launch("video/*")},
+//        modifier = Modifier.padding(top = 200.dp)
+//    ){
+//        Text("Upload Video")
+//    }
+//}
