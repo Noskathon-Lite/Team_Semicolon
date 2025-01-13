@@ -105,15 +105,19 @@ const Home = () => {
                 <h1>Recent Alert List</h1>
                 <hr />
                 <ol>
-                  {alertList.map((alert, index) => (
+                {alertList && alertList.length > 0 ? (
+                  alertList.map((alert, index) => (
                     <li key={index} type="number" className="alert-list">
                       <button>
                         <div onClick={() => handleAlertClick(alert)}>
-                          {alert.alerts}
+                          {alert.title}
                         </div>
                       </button>
                     </li>
-                  ))}
+                  ))
+                ) : (
+                  <p>No alerts available.</p>
+                )}
                 </ol>
               </div>
             </div>
