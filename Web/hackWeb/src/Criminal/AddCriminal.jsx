@@ -10,11 +10,12 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
+  const [crime, setCrime] = useState("");
   const [isWanted, setIsWanted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddCriminal({ name, gender, age, isWanted });
+    onAddCriminal({ name, gender, age, crime, isWanted });
     onClose();
   };
 
@@ -44,9 +45,9 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
             required
           />
         </label>
-        <label className="officer-label">
+        <label className="officer-label gender">
             <p>Gender:</p>
-            <div>
+            <div className="gender-radio">
               <label>
                 <input
                   type="radio"
@@ -56,7 +57,7 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
                   onChange={(e) => setGender(e.target.value)}
                   
                 />
-                Male
+                <p>Male</p>
               </label>
               <label>
                 <input
@@ -67,12 +68,12 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
                   onChange={(e) => setGender(e.target.value)}
                   
                 />
-                Female
+                <p>Female</p>
               </label>
             </div>
           </label>
         <label className="officer-label">
-         <p>Age </p> 
+         <p>Age :</p> 
           <input
           className="officer-input"
             type="number"
@@ -82,7 +83,7 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
           />
         </label>
         <label className="officer-label">
-         <p>Case </p> 
+         <p>Case: </p> 
           <input
           className="officer-input"
             type="text"
@@ -91,6 +92,17 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
             required
           />
         </label>
+        <label className="officer-label">
+          <div className="wanted">
+            <p>Wanted:</p>
+            <input
+              className="officer-input-checkbox"
+              type="checkbox"
+              checked={isWanted}
+              onChange={(e) => setIsWanted(e.target.checked)}
+            />
+            </div>
+          </label>
         <button type="submit" className="add-btn">Add</button>
       </form>
       

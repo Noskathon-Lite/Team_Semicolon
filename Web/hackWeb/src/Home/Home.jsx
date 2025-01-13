@@ -11,7 +11,7 @@ const Home = () => {
   const [showAddOfficerModal, setShowAddOfficerModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
-  
+  const [officers, setOfficers] = useState([]);
 
   // const [feedbacks, setFeedbacks] = useState([
   //   { id: "1", name: "name one", number: " 9876477428" },
@@ -24,7 +24,7 @@ const Home = () => {
  
 
   const handleTrash = (id) => {
-    setFeedbacks((prevFeedbacks) =>
+    setOfficers((prevFeedbacks) =>
       prevFeedbacks.filter((feedback) => feedback.id !== id)
     );
   };
@@ -46,11 +46,12 @@ const Home = () => {
     setShowAddOfficerModal(false);
   };
 
-  const handleAddOfficer = (officer) => {
-    setFeedbacks((prevFeedbacks) => [
-      ...prevFeedbacks,
-      { id: prevFeedbacks.length + 1, ...officer },
+  const handleAddOfficer = (newOfficer) => {
+    setOfficers((prevOfficers) => [
+      ...prevOfficers,
+      { id: prevOfficers.length + 1, ...newOfficer },
     ]);
+    setShowAddOfficerModal(false);
   };
   
 
@@ -119,11 +120,13 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <AddOfficerModal
-        show={showAddOfficerModal}
-        onClose={handleCloseAddOfficerModal}
-        onAddOfficer={handleAddOfficer}
-      />
+      {showAddOfficerModal && (
+        <AddOfficerModal
+          show={showAddOfficerModal}
+          onClose={handleCloseAddOfficerModal}
+          onAddOfficer={handleAddOfficer}
+        />
+      )}
     </>
   );
 };
