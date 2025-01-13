@@ -288,3 +288,38 @@ class ListFramesAPIView(APIView):
                     frame_files.append(frame_url)
 
         return Response({'frame_files': frame_files})
+
+
+class AllVideosInfoView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+
+        # Retrieve all videos uploaded by the user
+        videos = ProcessedVideo.objects.filter(user=user).prefetch_related('frames')
+
+        # Build the response
+        videos_data = []
+        for video in videos:
+
+            # Add video metadata
+            videos_data.append({
+                
+                'sender_name': video.user.name,
+                'video_url': video.video_file.url,
+                'location': {
+                    'longitude': video.location_longitude,
+                    'latitude': video.location_latitude,
+                },
+                'frames': [
+                    {
+                        'frame_url': frame.frame_file.url,
+                        'timestamp': frame.timestamp
+                    }
+                    for frame in video.frames.all()
+                ],
+                'processed_frames_path': video.processed_frames_path,
+            })
+
+        return JsonResponse({'videos': videos_data}, safe=False, status=200)

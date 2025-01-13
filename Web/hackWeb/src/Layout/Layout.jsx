@@ -1,36 +1,27 @@
 import React, { useEffect, useState } from "react";
 import "./layout.css";
 import axios from "axios";
-import { IoNotifications } from "react-icons/io5";
+// import { IoNotifications } from "react-icons/io5";
 import Home from "../Home/Home";
 import Criminal from "../Criminal/Criminal";
 import { FaRegHandshake } from "react-icons/fa";
-import Notification from "../Notification/Notification";
+// import Notification from "../Notification/Notification";
 // import Criminal from "../Criminal/Criminal";
 // import { CgProfile } from "react-icons/cg";
 
 const Layout = () => {
   const [toggleState, setToggleState] = useState(1);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const [showNotifications, setShowNotifications] = useState(false);
 
   const [feedbacks, setFeedbacks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleNotificationClick = () => {
-    setShowNotifications(!showNotifications);
-    setToggleState(4);
-    setUnreadCount(0);
-  };
+ 
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4Mjc4NTM3LCJpYXQiOjE3MzY3NDI1MzcsImp0aSI6ImFiMjFjYWMyZDQwMzQxODA5NWYyOTIzZmNiMGY0ZDk3IiwidXNlcl9pZCI6Mn0.vVOJ348exaOW3Fzn6y7JvIoVzeYpRue9M_2flEMjzOs";
 
   useEffect(() => {
-    const storedUnreadCount = localStorage.getItem("unreadCount");
-    if (storedUnreadCount) {
-      setUnreadCount(Number(storedUnreadCount)); // Set the unread count from localStorage
-    }
+   
 
     const fetchFeedbacks = async () => {
       setLoading(true);
@@ -56,30 +47,14 @@ const Layout = () => {
     fetchFeedbacks();
   }, [token]);
 
-  // Simulate an incoming notification
-  React.useEffect(() => {
-    const interval = setInterval(simulateNotification, 5000); // Simulates a new notification every 5 seconds
-
-    return () => clearInterval(interval);
-  }, []);
+  
 
   const toggleTab = (index) => {
     setToggleState(index);
 
-    if (index === 4) {
-      setUnreadCount(0); // Reset unread count when user clicks the notification tab
-      localStorage.setItem("unreadCount", 0); // Reset in localStorage as well
-    }
   };
 
-  // Simulate receiving a new notification
-  const simulateNotification = () => {
-    setUnreadCount((prevCount) => {
-      const newCount = prevCount + 1;
-      localStorage.setItem("unreadCount", newCount); // Save to localStorage
-      return newCount;
-    });
-  };
+  
 
   return (
     <>
@@ -157,7 +132,7 @@ const Layout = () => {
                     </a>
                   </li>
 
-                  <li type="none" className="nav-item notification">
+                  {/* <li type="none" className="nav-item notification">
                     {unreadCount > 0 && (
                       <span className="unread-count">{unreadCount}</span>
                     )}
@@ -171,7 +146,7 @@ const Layout = () => {
                     >
                       <IoNotifications />
                     </div>
-                  </li>
+                  </li> */}
                   {/* <li type="none" className="nav-item">
                     <a to="/about" className="nav-link">
                       <div><CgProfile /></div>
@@ -232,7 +207,7 @@ const Layout = () => {
               </div>
             </div>
           </div>
-          <div
+          {/* <div
             className={
               toggleState === 4 && showNotifications
                 ? "content active-content"
@@ -240,7 +215,7 @@ const Layout = () => {
             }
           >
             {showNotifications && <Notification />}
-          </div>
+          </div> */}
         </div>
       </main>
     </>
@@ -249,10 +224,4 @@ const Layout = () => {
 
 export default Layout;
 
-const feedbacks = [
-  { name: "Kiran ", subject: "abcd" },
-  { name: "feedback 2" },
-  { name: "feedback 3" },
-  { name: "feedback 4" },
-  { name: "feedback 5" },
-];
+
