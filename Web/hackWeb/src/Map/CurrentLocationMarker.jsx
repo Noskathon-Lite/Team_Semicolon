@@ -29,7 +29,7 @@ function LocationMarker({ setCurrentLocation }) {
     // If position is null, we don't render anything hai ta
     return position === null ? null : (
       <Marker position={position}>
-        <Popup>You are here</Popup>
+        <Popup>Incident Location</Popup>
       </Marker>
     )
   }
