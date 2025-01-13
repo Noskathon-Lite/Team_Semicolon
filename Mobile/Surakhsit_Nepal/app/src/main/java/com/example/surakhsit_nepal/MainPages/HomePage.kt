@@ -139,7 +139,7 @@ fun HomePage(navController : NavHostController) {
                         modifier = Modifier.padding(start = 20.dp, top = 30.dp)
                     ) {
                         IconsImage(Icons.Default.LocationOn, "police Stations\n Nearby"){
-                            navController.navigate(Screens.policeNearby.route)
+                            navController.navigate(Screens.nearByPolice.route)
                         }
                         IconsImage(Icons.Default.Book, "Notices"){
                             navController.navigate(Screens.notices.route)

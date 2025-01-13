@@ -13,23 +13,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.osmandroid.NearByPolice.NearByPolice
+import com.example.osmandroid.OSM.GeoLiveLocation.LocationViewModel
 import com.example.surakhsit_nepal.DataStore.DataStoreManager
 import com.example.surakhsit_nepal.MainPages.MainScreen
 import com.example.surakhsit_nepal.MainPages.Sections.EmergencyNumber
 import com.example.surakhsit_nepal.MainPages.Sections.FeedBack
 import com.example.surakhsit_nepal.MainPages.Sections.Notices
 import com.example.surakhsit_nepal.MainPages.Sections.WantedList
-import com.example.surakhsit_nepal.MainPages.Sections.policeNearBy
 import com.example.surakhsit_nepal.OnBoardingScreens.OnBoardingScreen
 import com.example.surakhsit_nepal.UserVerification.Login
 import com.example.surakhsit_nepal.UserVerification.Registration
 
+
 @SuppressLint("NewApi")
 @Composable
-fun SetUpNavigation(navController: NavHostController) {
+fun SetUpNavigation(navController: NavHostController,locationViewModel: LocationViewModel) {
     val context = LocalContext.current
     val dataStoreManager = DataStoreManager(context)
     val checkStatus by dataStoreManager.getStatus.collectAsState(initial = null)
+
+
 
     if (checkStatus == null) {
         LoadingScreen()
@@ -66,11 +70,14 @@ fun SetUpNavigation(navController: NavHostController) {
             composable(Screens.notices.route) {
                 Notices(navController)
             }
-            composable(Screens.policeNearby.route) {
-                policeNearBy(navController)
-            }
+//            composable(Screens.policeNearby.route) {
+//                policeNearBy(navController)
+//            }
             composable(Screens.wanted.route) {
                 WantedList(navController)
+            }
+            composable(Screens.nearByPolice.route) {
+                NearByPolice(navController,locationViewModel)
             }
         }
 

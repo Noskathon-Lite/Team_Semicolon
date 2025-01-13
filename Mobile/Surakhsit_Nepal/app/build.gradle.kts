@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -106,6 +107,14 @@ dependencies {
 
     implementation(libs.osmdroid.osmdroid.android)
     implementation(libs.ui)
+
+    //coroutinesx ko lagi
+    implementation(libs.kotlinx.coroutines.play.services)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.android.maps.utils)
+//    implementation(libs.osmdroid.geopackage)
+//    implementation(libs.osmdroid.third.party)
+
 
 
 

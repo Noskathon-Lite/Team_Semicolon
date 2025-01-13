@@ -1,16 +1,20 @@
 [versions]
 accompanistPermissions = "0.31.3-beta"
 agp = "8.7.3"
+androidMapsUtils = "3.5.0"
 coilCompose = "2.4.0"
 converterGson = "2.9.0"
 datastorePreferencesCore = "1.1.1"
 datastorePreferencesVersion = "1.0.0"
 foundation = "1.7.6"
+geopackage = "6.2.0"
+geopackageAndroidMap = "6.7.4"
 kotlin = "2.0.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
+kotlinxCoroutinesPlayServices = "1.8.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.9.3"
 composeBom = "2024.04.01"
@@ -19,15 +23,19 @@ navigationCompose = "2.8.5"
 okhttp = "4.12.0"
 okhttpBom = "4.12.0"
 osmdroidAndroidVersion = "6.1.12"
+osmdroidGeopackage = "(6.1.6)"
+osmdroidThirdParty = "6.0.1"
 playServicesAuth = "21.3.0"
 playServicesLocation = "21.3.0"
 playServicesMaps = "19.0.0"
 retrofit = "2.9.0"
 rxjava = "2.2.21"
 ui = "1.7.6"
+runtimeLivedata = "1.7.6"
 
 [libraries]
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+android-maps-utils = { module = "com.google.maps.android:android-maps-utils", version.ref = "androidMapsUtils" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-datastore-core = { module = "androidx.datastore:datastore-core", version.ref = "datastorePreferencesCore" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferencesCore" }
@@ -36,10 +44,13 @@ androidx-datastore-preferences-v100 = { module = "androidx.datastore:datastore-p
 androidx-datastore-rxjava2 = { module = "androidx.datastore:datastore-rxjava2", version.ref = "datastorePreferencesCore" }
 androidx-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "foundation" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
+geopackage = { module = "mil.nga.geopackage:geopackage", version.ref = "geopackage" }
+geopackage-android-map = { module = "mil.nga.geopackage.map:geopackage-android-map", version.ref = "geopackageAndroidMap" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -53,16 +64,20 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+kotlinx-coroutines-play-services = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services", version.ref = "kotlinxCoroutinesPlayServices" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttpBom" }
+osmdroid-geopackage = { module = "org.osmdroid:osmdroid-geopackage", version.ref = "osmdroidGeopackage" }
 osmdroid-osmdroid-android = { module = "org.osmdroid:osmdroid-android", version.ref = "osmdroidAndroidVersion" }
+osmdroid-third-party = { module = "org.osmdroid:osmdroid-third-party", version.ref = "osmdroidThirdParty" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
 ui = { module = "androidx.compose.ui:ui", version.ref = "ui" }
+androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
