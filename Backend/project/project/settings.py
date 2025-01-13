@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "app",
     "rest_framework",
     "corsheaders",
+    'channels',
     
 ]
 
@@ -144,10 +145,27 @@ SIMPLE_JWT = {
 
 AUTH_USER_MODEL = 'app.User'
 
-ALLOWED_HOSTS = ['*',
+ALLOWED_HOSTS = ['*']
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://192.168.23.6:3000",  # Your frontend origin
+    "http://localhost:3000",     # Add other relevant origins if necessary
 ]
 
 import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+ASGI_APPLICATION ='app.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # For development
+    },
+}

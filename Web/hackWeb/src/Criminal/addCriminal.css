@@ -8,16 +8,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+   
   }
   
   .modal-content-addCriminal {
     background: white;
     padding: 20px;
     border-radius: 5px;
-    width: 500px;
+    width: 420px;
     max-width: 100%;
-    height: 730px;
+    height: 560px;
   }
   .officer-content{
     display: flex;
@@ -30,6 +30,7 @@
     justify-content: center;
     align-content: center;
     flex-direction: column;
+    padding: 20px;
   }
   .officer-header{
     display: flex;
@@ -42,15 +43,42 @@
     color: #2d3482 ;
   }
   .officer-label{
+    display: block;
+    justify-content: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 5px;
+    max-width:350px ;
+    padding: 5px;
+    
+ 
+   
+  }
+  .officer-form .gender{
     display: flex;
     justify-content: flex-start;
     align-content: center;
     flex-wrap: wrap;
-    flex-direction: column;
-    margin: 10px;
+    flex-direction: row;
+    margin: 5px;
+    padding:15px;
     max-width:350px ;
-    gap: 10px;
+ 
    
+  }
+
+  .gender-radio{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 15px;
+    max-width:350px ;
+    padding: 5px;
+    gap: 5px;
+    
   }
 
   .officer-label p{
@@ -82,4 +110,22 @@
     justify-content: center;
     align-content: center;
     margin-top: 10px;
+  }
+
+  .wanted{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    
+    gap: 0px;
+    padding: 0;
+    
+  }
+  .wanted .officer-input-checkbox{
+    gap: 0px;
+  }
+  .officer-label .wanted  input{
+    width: 20%;
   }

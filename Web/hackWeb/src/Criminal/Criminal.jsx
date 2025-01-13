@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./criminal.css";
-
-import { FaToggleOn } from "react-icons/fa";
-import { FaToggleOff } from "react-icons/fa";
+import { FaToggleOn, FaToggleOff } from "react-icons/fa";
 import AddCriminalModal from "./AddCriminal";
 
 const Criminal = () => {
   const [criminals, setCriminals] = useState([]);
-   const [showAddCriminalModal, setShowAddCriminalModal] = useState(false);
+  const [showAddCriminalModal, setShowAddCriminalModal] = useState(false);
 
   const handleClick = (id) => {
     setCriminals((prevCriminals) =>
@@ -26,6 +24,7 @@ const Criminal = () => {
   const handleCloseAddCriminalModal = () => {
     setShowAddCriminalModal(false);
   };
+
   const handleAddCriminal = (newCriminal) => {
     setCriminals((prevCriminals) => [
       ...prevCriminals,
@@ -33,8 +32,6 @@ const Criminal = () => {
     ]);
     setShowAddCriminalModal(false);
   };
-
- 
 
   useEffect(() => {
     // Simulated data fetching
@@ -46,7 +43,7 @@ const Criminal = () => {
           address: "123 Main St",
           age: 30,
           crime: "Theft",
-          isWanted: "null",
+          isWanted: false,
         },
         {
           id: 2,
@@ -54,7 +51,7 @@ const Criminal = () => {
           address: "456 Maple Ave",
           age: 25,
           crime: "Fraud",
-          isWanted: "false",
+          isWanted: false,
         },
         {
           id: 3,
@@ -62,7 +59,7 @@ const Criminal = () => {
           address: "789 Oak Blvd",
           age: 40,
           crime: "Burglary",
-          isWanted: "false",
+          isWanted: false,
         },
         {
           id: 4,
@@ -70,7 +67,7 @@ const Criminal = () => {
           address: "321 Pine St",
           age: 35,
           crime: "Arson",
-          isWanted: "false",
+          isWanted: false,
         },
       ];
       setCriminals(data);
@@ -115,9 +112,9 @@ const Criminal = () => {
                             onClick={() => handleClick(criminal.id)}
                           >
                             {criminal.isWanted ? (
-                              <FaToggleOn  className="toggle-icon"/>
+                              <FaToggleOn className="toggle-icon" />
                             ) : (
-                              <FaToggleOff className="toggle-icon"/>
+                              <FaToggleOff className="toggle-icon" />
                             )}
                           </div>
                         </div>
@@ -130,7 +127,9 @@ const Criminal = () => {
           ))}
         </div>
       </div>
-      <button onClick={handleAddCriminalClick} className="add-criminal">Add criminal</button>
+      <button onClick={handleAddCriminalClick} className="add-criminal">
+        Add criminal
+      </button>
       {showAddCriminalModal && (
         <AddCriminalModal
           show={showAddCriminalModal}

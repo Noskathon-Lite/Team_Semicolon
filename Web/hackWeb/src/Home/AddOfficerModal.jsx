@@ -3,19 +3,15 @@ import ReactModal from "react-modal";
 import Modal from "react-modal";
 import { IoClose } from "react-icons/io5";
 import "./addOfficer.css";
-
 ReactModal.setAppElement("#root");
-
 const AddOfficerModal = ({ show, onClose, onAddOfficer }) => {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddOfficer({ name, number });
     onClose();
   };
-
   return (
     <Modal
       isOpen={show}
@@ -59,5 +55,4 @@ const AddOfficerModal = ({ show, onClose, onAddOfficer }) => {
     </Modal>
   );
 };
-
 export default AddOfficerModal;

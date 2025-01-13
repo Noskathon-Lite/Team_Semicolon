@@ -30,6 +30,8 @@ from rest_framework.views import APIView
 import cv2
 from .face_recognition_model import process_video
 from .models import ProcessedVideo
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 
 
 class RegisterUserView(APIView):
@@ -244,6 +246,15 @@ class VideoUploadView(APIView):
                 processed_frames_path=processed_folder
             )
             processed_video.save()
+            channel_layer = get_channel_layer()
+
+            async_to_sync(channel_layer.group_send)(
+            "police_alerts",
+            {
+                "type": "alert_message",
+                "message": f"New video uploaded at coordinates ({location_latitude}, {location_longitude}). Check it out!"
+            }
+            )
 
             # Return the response to the user
             return JsonResponse({

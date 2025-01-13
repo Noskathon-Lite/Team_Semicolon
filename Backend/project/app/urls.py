@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from .views import RegisterUserView , UserLoginView , AllVideosInfoView ,PoliceLoginView , RegisterPoliceView , CreateCriminalView , ListCriminalsView , CreateFeedbackView , ListFeedbacksView , VideoUploadView , ListVideosAPIView , ListFramesAPIView
 
@@ -16,3 +18,8 @@ urlpatterns = [
     path('frames/' , ListFramesAPIView.as_view(), name='list-frame'),
     path('all/', AllVideosInfoView.as_view(), name='all-videos-info'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
