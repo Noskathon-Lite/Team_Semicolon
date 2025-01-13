@@ -13,16 +13,21 @@ const Home = () => {
   const [selectedAlert, setSelectedAlert] = useState(null);
 const[loading, setLoading] = useState(false);
   const [alertList, setAlertList] = useState([]);
-  // 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [officers, setOfficers] = useState([]);
 
   
 
-  const [officers, setOfficers] = useState(() => {
-    // Retrieve officers from local storage or initialize with an empty array
-    const savedOfficers = localStorage.getItem("officers");
-    return savedOfficers ? JSON.parse(savedOfficers) : [];
-  });
+  // const [feedbacks, setFeedbacks] = useState([
+  //   { id: "1", name: "name one", number: " 9876477428" },
+  //   { id: "2", name: "name two", number: " 9876477428" },
+  //   { id: "3", name: "name three", number: " 9876477428" },
+  // ]);
 
+  
+
+ 
 
   const handleTrash = (id) => {
     setOfficers((prevFeedbacks) =>
@@ -80,7 +85,7 @@ const[loading, setLoading] = useState(false);
     useEffect(() => {
       const fetchData = async () => {
         try {
-          const response = await fetch("http://192.168.23.44:8000/api/all", {
+          const response = await fetch("http://192.168.23.44:8000/api/list/feedback/", {
             method: "GET", // or "POST" or other HTTP methods as needed
             headers: {
               "Authorization": `Bearer ${token}`, // Include the Authorization header
@@ -93,8 +98,9 @@ const[loading, setLoading] = useState(false);
           }
   
           const result = await response.json();
-          setAlertList(result);
+          setAlertList(result.data.videos);
           console.log(result)
+          console.log(result.data.videos)
         } catch (err) {
           setError(err.message);
         } finally {
@@ -123,6 +129,7 @@ const[loading, setLoading] = useState(false);
                 {alertList && alertList.length > 0 ? (
                   alertList.map((alert, index) => (
                     <li key={index} type="number" className="alert-list">
+                      {alert.user_name}
                       <button>
                         <div onClick={() => handleAlertClick(alert)}>
                           {alert.title}

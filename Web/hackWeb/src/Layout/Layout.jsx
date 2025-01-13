@@ -42,7 +42,7 @@ const Layout = () => {
   
           const result = await response.json();
           setFeedbacks(result);
-          console.log(result)
+          //console.log(result)
         } catch (err) {
           setError(err.message);
         } finally {
