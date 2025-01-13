@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User , Criminal , Feedback
+from .models import User , Criminal , Feedback , ProcessedVideo
 from django.utils import timezone
 from datetime import date , timedelta
 from django.contrib.auth import get_user_model
@@ -84,6 +84,20 @@ class FeedbackSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"user": "Authentication is required to create feedback."})
         return super().create(validated_data)
 
+
+
+class ProcessedVideoListSerializer(serializers.ModelSerializer):
+    user_name = serializers.CharField(source='user.name', read_only=True)
+    video_url = serializers.SerializerMethodField()
+    class Meta:
+        model = ProcessedVideo
+        fields = ('video_file', 'video_url','location_longitude', 'location_latitude' , 'user_name' , 'uploaded_date','uploaded_time')
+
+    def get_video_url(self,obj):
+        request = self.context.get('request')
+        if request and obj.video_file:
+            return request.build_absolute_uri(obj.video_file.url)
+        return None
 
 
 

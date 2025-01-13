@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import RegisterUserView , UserLoginView , PoliceLoginView , RegisterPoliceView , CreateCriminalView , ListCriminalsView , CreateFeedbackView , ListFeedbacksView , VideoUploadView
+from .views import RegisterUserView , UserLoginView , PoliceLoginView , RegisterPoliceView , CreateCriminalView , ListCriminalsView , CreateFeedbackView , ListFeedbacksView , VideoUploadView , ListVideosAPIView , ListFramesAPIView
 
 
 urlpatterns = [
@@ -12,4 +12,6 @@ urlpatterns = [
     path('create/feedback/' , CreateFeedbackView.as_view() , name='feedback-create'),
     path('list/feedback/' , ListFeedbacksView.as_view() , name='feedback-list'),
     path('upload/', VideoUploadView.as_view(), name='video-upload'),
+    path('videos/', ListVideosAPIView.as_view(), name='list-videos'),
+    path('frames/' , ListFramesAPIView.as_view(), name='list-frame')
 ]
