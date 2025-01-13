@@ -52,19 +52,18 @@ import coil.compose.rememberImagePainter
 import com.example.surakhsit_nepal.Backend.BackendData.BackendViewModel
 import com.example.surakhsit_nepal.Components.BelowNavBar
 import com.example.surakhsit_nepal.Components.TopNavBar
+import com.example.surakhsit_nepal.CriminalDatabase.CriminalsViewModel
+import com.example.surakhsit_nepal.CriminalDatabase.criminals
 import com.example.surakhsit_nepal.CriminalDatabase.criminalsItem
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 
 
 @Composable
-fun WantedList(navController : NavHostController,viewModel : BackendViewModel = viewModel()){
+fun WantedList(navController : NavHostController,viewModel: CriminalsViewModel = viewModel()){
 
     //yetanera ko criminals ko lagi
-    val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MjA4OTg1LCJpYXQiOjE3MzY2NzI5ODUsImp0aSI6IjY0MThmN2M2ZGZhYjQ1NWNhZGI3YjEzNGJhZDU1MjE1IiwidXNlcl9pZCI6Mn0._dTs6iszpk7sergxY4e-QsX9cIevCq0AZkf68l0RsLg"
-    LaunchedEffect(token) {
-        viewModel.fetchCriminals(token)
-    }
     val criminals = viewModel.criminals.collectAsState()
+
     if (criminals.value.isEmpty()) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize().wrapContentSize())
         Log.e("why","${criminals.value}")
@@ -90,7 +89,7 @@ fun WantedList(navController : NavHostController,viewModel : BackendViewModel = 
 
             ) {
                 items(criminals.value) { items ->
-                    CriminalItem(items)
+                    WantedDataShow(items)
 
                 }
             }
@@ -106,58 +105,67 @@ fun WantedList(navController : NavHostController,viewModel : BackendViewModel = 
 }
 
 
-////data : criminalsItem
-//@Composable
-//fun WantedDataShow(data : Cr){
-//    var isExpanded by remember { mutableStateOf(false) }
-//
-//    Card(
-//        modifier = Modifier.fillMaxWidth(.4f)
-//            .padding(top = 10.dp)
-//            .height(
-//                if(isExpanded) 150.dp else 90.dp
-//            )
-//            .clip(RoundedCornerShape(10.dp))
-//
-//            .clickable {
-//                isExpanded = !isExpanded
-//            },
-//
-//        colors = CardDefaults.cardColors(backgroundColor)
-//    )
-//    {
-//        Column(
-//            modifier = Modifier.fillMaxWidth(),
-//            verticalArrangement = Arrangement.Center,
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            Image(
-//                imageVector = Icons.Default.PersonPinCircle,
-//                contentDescription = "image",
-//                colorFilter = ColorFilter.tint(Color.White),
-//                modifier = Modifier.size(60.dp)
-//
-//
-//
-//            )
-//            if(isExpanded){
-//                Spacer(modifier = Modifier.height(20.dp))
-//                Column(){
-//                    Text(text = "Name : janak", color = Color.White)
-//                    Text(text = "Age : 32", color = Color.White)
-//                    Text(text = "Case : Robbery", color = Color.White)
-//
-//                }
-//            }
-//
-//        }
-//    }
-//
-//}
+//data : criminalsItem
+@Composable
+fun WantedDataShow(data : criminalsItem){
+    var isExpanded by remember { mutableStateOf(false) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth(.4f)
+            .padding(top = 10.dp)
+            .height(
+                if(isExpanded) 180.dp else 90.dp
+            )
+            .clip(RoundedCornerShape(10.dp))
+
+            .clickable {
+                isExpanded = !isExpanded
+            },
+
+        colors = CardDefaults.cardColors(backgroundColor)
+    )
+    {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Image(
+                imageVector = Icons.Default.PersonPinCircle,
+                contentDescription = "image",
+                colorFilter = ColorFilter.tint(Color.White),
+                modifier = Modifier.size(60.dp)
+
+
+
+            )
+            if(isExpanded){
+                Spacer(modifier = Modifier.height(20.dp))
+                Column(){
+                    Text(text =data.name , color = Color.White)
+                    Text(text = "${data.age}", color = Color.White)
+                    Text(text = data.gender, color = Color.White)
+                    Text(text = data.case,color = Color.White)
+
+                }
+            }
+
+        }
+    }
+
+}
 
 @Composable
 fun CriminalItem(criminal: criminalsItem) {
-    val fullImageUrl = "http://192.168.23.8:8000" + criminal.image
+    val baseUrl = "http://192.168.23.8:8000"
+    val fullImageUrl = baseUrl + criminal.image //image rw url laii concat gareko
+
+    val imagePainter = rememberImagePainter(
+        data = fullImageUrl,
+        builder = {
+            crossfade(true)
+        }
+    )
     Row(
         modifier = Modifier
             .fillMaxWidth()
