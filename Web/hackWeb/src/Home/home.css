@@ -129,6 +129,7 @@ padding: 10px 20px;
     margin: 5px 20px;
     padding: 10px 30px;
     width: 100%;
+    height: auto;
 }
 
 
@@ -154,27 +155,31 @@ padding: 10px 20px;
     font-weight: 400;
     color: black;
     text-align: left;
+    
 }
 
-.feedback-list{
-    padding: 5px;
-    /* display: flex; */
-    justify-content: flex-start;
-    align-items: center;
-   
-}
+
+ .feedback-content td {
+    border: none;
+    padding: 8px;
+  }
 .officer-detail{
     display: flex;
     justify-content:flex-start;
     flex-direction: row;
     gap: 25px;
 }
+
+.add-officer{
+    margin: 15px;
+}
 .trash-officer-detail{
     display: none;
 }
 .trash-icon{
     position: absolute;
-    display: inline;
+    padding:0 ;
+    margin: 0;
     right: 12%;
     justify-content: flex-end;
     align-items: flex-end;
