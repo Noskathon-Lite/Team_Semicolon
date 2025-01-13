@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Modal from "react-modal";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import AlertModal from "../Component/AlertModal";
 import { FaTrashRestoreAlt } from "react-icons/fa";
 import AddOfficerModal from "./AddOfficerModal";
@@ -10,12 +11,15 @@ const Home = () => {
   const [showAddOfficerModal, setShowAddOfficerModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedAlert, setSelectedAlert] = useState(null);
+  
 
-  const [feedbacks, setFeedbacks] = useState([
-    { id: "1", name: "name one", number: " 9876477428" },
-    { id: "2", name: "name two", number: " 9876477428" },
-    { id: "3", name: "name three", number: " 9876477428" },
-  ]);
+  // const [feedbacks, setFeedbacks] = useState([
+  //   { id: "1", name: "name one", number: " 9876477428" },
+  //   { id: "2", name: "name two", number: " 9876477428" },
+  //   { id: "3", name: "name three", number: " 9876477428" },
+  // ]);
+
+  
 
  
 

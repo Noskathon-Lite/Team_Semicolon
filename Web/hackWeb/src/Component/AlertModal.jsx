@@ -54,12 +54,14 @@ function AlertModal({ show, onClose, alert }) {
                         <div className="alert-details">
                             <h3>Sender Info</h3>
                             <div className="details">
-                                <span>Name: <span style={{fontWeight:"bold"}}>Jyoti Jyoshi</span></span>
-                                <span>Time: <span style={{fontWeight:"bold"}}>Jyoti Jyoshi</span></span>
-                                <span>Name: <span style={{fontWeight:"bold"}}>Jyoti Jyoshi</span></span>
-                                <span>Date: <span style={{fontWeight:"bold"}}>988123213</span></span>
-                                <span><span style={{fontWeight:"bold"}}></span></span>
-                                <span><span style={{fontWeight:"bold"}}></span></span>
+                                <div className="side-details">
+                                    <span>Name: <span style={{fontWeight:"bold"}}>Jyoti Jyoshi</span></span>
+                                    <span>Time: <span style={{fontWeight:"bold"}}>12:00 AM</span></span>
+                                </div>
+                                <div className="side-details">
+                                    <span>Phone: <span style={{fontWeight:"bold"}}>9840989641</span></span>
+                                    <span>Date: <span style={{fontWeight:"bold"}}>12 Jan, 2025</span></span>
+                                </div>
                             </div>
                             
                         </div>
@@ -67,9 +69,6 @@ function AlertModal({ show, onClose, alert }) {
                             <h3>Incident Location</h3>
                             <div className="map">
                                 <OSM/>
-                            </div>
-                            <div className="location">
-                                <button onClick={handleMapToggleChange}>See Location</button>
                             </div>
                         </div>
                     </div>

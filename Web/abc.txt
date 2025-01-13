@@ -1,1 +1,23 @@
-hello
+const originalUrl =
+    "http://192.168.67.96:8000/media/home/user/Desktop/NOSK/Team_Semicolon/Backend/project/media/videos/my.mp4";
+
+  // Function to extract the desired URL
+  const getModifiedUrl = (url) => {
+    const firstMediaIndex = url.indexOf("/media/");
+    const secondMediaIndex = url.indexOf("/media/", firstMediaIndex + 1);
+
+    if (secondMediaIndex !== -1) {
+      return url.substring(0, firstMediaIndex) + url.substring(secondMediaIndex);
+    }
+    return url; // Return the original URL if the second "/media/" is not found
+  };
+
+  const modifiedUrl = getModifiedUrl(originalUrl);
+
+
+return(
+     <div>
+      <h1>Modified URL:</h1>
+      <p>{modifiedUrl}</p>
+    </div>
+)
