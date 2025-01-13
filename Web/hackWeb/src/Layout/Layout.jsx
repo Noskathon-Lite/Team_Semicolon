@@ -16,36 +16,42 @@ const Layout = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
- 
+  const handleNotificationClick = () => {
+    setShowNotifications(!showNotifications);
+    setToggleState(4);
+    setUnreadCount(0);
+  };
+  const [data, setData] = useState(null);
+
   const token =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4Mjc4NTM3LCJpYXQiOjE3MzY3NDI1MzcsImp0aSI6ImFiMjFjYWMyZDQwMzQxODA5NWYyOTIzZmNiMGY0ZDk3IiwidXNlcl9pZCI6Mn0.vVOJ348exaOW3Fzn6y7JvIoVzeYpRue9M_2flEMjzOs";
 
-  useEffect(() => {
-   
-
-    const fetchFeedbacks = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await axios.get(
-          "http://192.168.23.44:8000/api/list/feedback/",
-          {
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch("http://192.168.23.44:8000/api/list/feedback/", {
+            method: "GET", // or "POST" or other HTTP methods as needed
             headers: {
-              Authorization: `Bearer ${token}`,
+              "Authorization": `Bearer ${token}`, // Include the Authorization header
+              "Content-Type": "application/json", // Optional, based on your API
             },
+          });
+  
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
           }
-        );
-        setFeedbacks(response.data);
-        console.log(response.data);
-      } catch (err) {
-        setError(err.message || "Failed to fetch data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchFeedbacks();
-  }, [token]);
+  
+          const result = await response.json();
+          setData(result);
+        } catch (err) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchData();
+    }, [token]);
 
   
 
