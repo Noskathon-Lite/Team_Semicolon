@@ -1,11 +1,11 @@
 package com.example.surakhsit_nepal.MainPages.videoUploader
 
 
-
 import android.content.Context
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import com.example.surakhsit_nepal.Backend.BackendObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -27,7 +27,7 @@ suspend fun uploadVideo(context: Context, videoUri: Uri, token: String, latitude
 
         try {
             val authHeader = "Bearer $token"
-            val response = B.apiService.uploadVideo(
+            val response = BackendObject.authService.uploadVideo(
                 token = authHeader,
                 video = videoPart,
                 latitude = latitudeBody,
