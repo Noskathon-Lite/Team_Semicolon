@@ -7,7 +7,7 @@ import './login.css';
 
 
 import SignUp from '../Signup/Signup';
-import { Modal, Button } from 'react-bootstrap';
+
 
 
 

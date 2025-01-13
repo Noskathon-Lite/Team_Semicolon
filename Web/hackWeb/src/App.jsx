@@ -12,9 +12,9 @@ const App = ()=> {
     <>
     <Router>
       <Routes>
-        <Route path="/" element={<Login/>}>
-        <Route path="layout" element={<Layout/>}/>
-       </Route>
+        {/* <Route path="/" element={<Login/>}> */}
+        <Route path="/" element={<Layout/>}/>
+      
 
       </Routes>
     </Router>
