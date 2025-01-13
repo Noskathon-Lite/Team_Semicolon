@@ -21,10 +21,9 @@ const Layout = () => {
     setToggleState(4);
     setUnreadCount(0);
   };
-  const [data, setData] = useState(null);
 
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4Mjc4NTM3LCJpYXQiOjE3MzY3NDI1MzcsImp0aSI6ImFiMjFjYWMyZDQwMzQxODA5NWYyOTIzZmNiMGY0ZDk3IiwidXNlcl9pZCI6Mn0.vVOJ348exaOW3Fzn6y7JvIoVzeYpRue9M_2flEMjzOs";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4MjgzNDYxLCJpYXQiOjE3MzY3NDc0NjEsImp0aSI6ImVkNWJhMGNjN2I0NTRmZjQ5MDAxYWYyMjVjYTVkMGQyIiwidXNlcl9pZCI6M30.9ufWjo6vmET7eGB7j_cuz0TsQbTaxeMWoTWZcNC6py0";
 
     useEffect(() => {
       const fetchData = async () => {
@@ -42,7 +41,8 @@ const Layout = () => {
           }
   
           const result = await response.json();
-          setData(result);
+          setFeedbacks(result);
+          console.log(result)
         } catch (err) {
           setError(err.message);
         } finally {
@@ -196,12 +196,14 @@ const Layout = () => {
                     {loading && <p>Loading...</p>}
                     {error && <p style={{ color: "red" }}>{error}</p>}
                     {/* render feedback  from backend */}
-                    {feedbacks.map((feedback, index) => (
-                      <li key={index} type="number" className="feedback-list">
-                        {feedback.name} {feedback.subject}
-                        {/* Adjust based on your data structure */}
-                      </li>
-                    ))}
+                
+                        {feedbacks.map((feedback, index) => (
+                          <li key={index} type="number" className="feedback-list">
+                            {feedback.user_name} {feedback.title}{feedback.content}
+                            {/* Adjust based on your data structure */}
+                          </li>
+                        ))}
+                    
 
                     {/* <li type="number" className="feedback-list">
                 {" "}
