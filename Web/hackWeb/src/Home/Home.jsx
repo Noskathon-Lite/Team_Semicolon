@@ -99,15 +99,15 @@ const Home = () => {
                 <table>
                  
                   <tbody>
-                    {feedbacks.map((feedback, index) => (
+                    {officers.map((officer, index) => (
                       <tr key={index} className="feedback-list">
                         <td>{index+1} {" "} </td>
-                        <td>{feedback.name}</td>
-                        <td>{feedback.number}</td>
+                        <td>{officer.name}</td>
+                        <td>{officer.number}</td>
                         <td>
                           <FaTrashRestoreAlt
                             className="trash-icon"
-                            onClick={() => handleTrash(feedback.id)}
+                            onClick={() => handleTrash(officer.id)}
                           />
                         </td>
                       </tr>

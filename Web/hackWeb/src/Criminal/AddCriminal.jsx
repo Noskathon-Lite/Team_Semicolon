@@ -78,7 +78,7 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
           className="officer-input"
             type="number"
             value={age}
-            onChange={(e) => setNumber(e.target.value)}
+            onChange={(e) => setAge(e.target.value)}
             required
           />
         </label>
@@ -88,7 +88,7 @@ const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
           className="officer-input"
             type="text"
             value={crime}
-            onChange={(e) => setNumber(e.target.value)}
+            onChange={(e) => setCrime(e.target.value)}
             required
           />
         </label>

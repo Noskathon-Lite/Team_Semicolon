@@ -5,17 +5,17 @@ const DetectNotification = () => {
 
   useEffect(() => {
     // Establish WebSocket connection
-    const socket = new WebSocket('ws://192.168.23.44:8000/ws/notifications/');
+    const socket = new WebSocket('ws://127.0.0.1/ws/alerts/');
 
-    // On message from WebSocket
-    socket.onmessage = function (event) {
+   
+    socket.onmessage = function(event) {
       const data = JSON.parse(event.data);
-      if (data.message === 'Criminal Detected') {
-        setMessage('Criminal Detected or Matched!');
-        // Optionally, trigger a visual notification like an alert or modal.
-        alert('Criminal Detected!');
-      }
-    };
+      console.log('Alert:', data.message);
+  };
+  
+  socket.onclose = function(event) {
+      console.error('WebSocket closed unexpectedly');
+  };
 
     // Close connection on cleanup
     return () => socket.close();
