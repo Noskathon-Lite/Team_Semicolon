@@ -3,8 +3,11 @@ import "./criminal.css";
 
 import { FaToggleOn } from "react-icons/fa";
 import { FaToggleOff } from "react-icons/fa";
+import AddCriminalModal from "./AddCriminal";
+
 const Criminal = () => {
   const [criminals, setCriminals] = useState([]);
+   const [showAddCriminalModal, setShowAddCriminalModal] = useState(false);
 
   const handleClick = (id) => {
     setCriminals((prevCriminals) =>
@@ -15,6 +18,23 @@ const Criminal = () => {
       )
     );
   };
+
+  const handleAddCriminalClick = () => {
+    setShowAddCriminalModal(true);
+  };
+
+  const handleCloseAddCriminalModal = () => {
+    setShowAddCriminalModal(false);
+  };
+  const handleAddCriminal = (newCriminal) => {
+    setCriminals((prevCriminals) => [
+      ...prevCriminals,
+      { id: prevCriminals.length + 1, ...newCriminal },
+    ]);
+    setShowAddCriminalModal(false);
+  };
+
+ 
 
   useEffect(() => {
     // Simulated data fetching
@@ -84,7 +104,7 @@ const Criminal = () => {
                     <ul>
                       <li type="none" className="criminal-list-item">
                         <h3>Name: {criminal.name}</h3>
-                        <h3>Address: {criminal.address}</h3>
+                        <h3>Gender: {criminal.address}</h3>
                         <h3>Age: {criminal.age}</h3>
                         <h3>Crime: {criminal.crime}</h3>
                         <div className="toggle-content">
@@ -110,7 +130,14 @@ const Criminal = () => {
           ))}
         </div>
       </div>
-      <button>Add criminal</button>
+      <button onClick={handleAddCriminalClick} className="add-criminal">Add criminal</button>
+      {showAddCriminalModal && (
+        <AddCriminalModal
+          show={showAddCriminalModal}
+          onClose={handleCloseAddCriminalModal}
+          onAddCriminal={handleAddCriminal}
+        />
+      )}
     </div>
   );
 };

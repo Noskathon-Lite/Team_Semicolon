@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./layout.css";
-
+import axios from "axios";
 import { IoNotifications } from "react-icons/io5";
 import Home from "../Home/Home";
 import Criminal from "../Criminal/Criminal";
@@ -12,13 +12,49 @@ import Notification from "../Notification/Notification";
 const Layout = () => {
   const [toggleState, setToggleState] = useState(1);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleNotificationClick = () => {
+    setShowNotifications(!showNotifications);
+    setToggleState(4);
+    setUnreadCount(0);
+  };
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4Mjc4NTM3LCJpYXQiOjE3MzY3NDI1MzcsImp0aSI6ImFiMjFjYWMyZDQwMzQxODA5NWYyOTIzZmNiMGY0ZDk3IiwidXNlcl9pZCI6Mn0.vVOJ348exaOW3Fzn6y7JvIoVzeYpRue9M_2flEMjzOs";
 
   useEffect(() => {
     const storedUnreadCount = localStorage.getItem("unreadCount");
     if (storedUnreadCount) {
       setUnreadCount(Number(storedUnreadCount)); // Set the unread count from localStorage
     }
-  }, []);
+
+    const fetchFeedbacks = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get(
+          "http://192.168.23.44:8000/api/list/feedback/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setFeedbacks(response.data);
+        console.log(response.data);
+      } catch (err) {
+        setError(err.message || "Failed to fetch data");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchFeedbacks();
+  }, [token]);
 
   // Simulate an incoming notification
   React.useEffect(() => {
@@ -29,6 +65,7 @@ const Layout = () => {
 
   const toggleTab = (index) => {
     setToggleState(index);
+
     if (index === 4) {
       setUnreadCount(0); // Reset unread count when user clicks the notification tab
       localStorage.setItem("unreadCount", 0); // Reset in localStorage as well
@@ -120,19 +157,19 @@ const Layout = () => {
                     </a>
                   </li>
 
-                  <li type="none" className="nav-item">
+                  <li type="none" className="nav-item notification">
+                    {unreadCount > 0 && (
+                      <span className="unread-count">{unreadCount}</span>
+                    )}
                     <div
                       className={
                         toggleState === 4
                           ? "tabs active-tabs nav-link"
                           : "tabs nav-link"
                       }
-                      onClick={() => toggleTab(4)}
+                      onClick={handleNotificationClick}
                     >
                       <IoNotifications />
-                      {unreadCount > 0 && (
-                        <span className="unread-count">{unreadCount}</span>
-                      )}
                     </div>
                   </li>
                   {/* <li type="none" className="nav-item">
@@ -163,6 +200,8 @@ const Layout = () => {
           >
             <Criminal />
           </div>
+
+          {/* feedback section */}
           <div
             className={toggleState === 3 ? "content active-content" : "content"}
           >
@@ -173,6 +212,8 @@ const Layout = () => {
                   <h1>Feedback</h1>
                   <hr />
                   <ol>
+                    {loading && <p>Loading...</p>}
+                    {error && <p style={{ color: "red" }}>{error}</p>}
                     {/* render feedback  from backend */}
                     {feedbacks.map((feedback, index) => (
                       <li key={index} type="number" className="feedback-list">
@@ -192,9 +233,13 @@ const Layout = () => {
             </div>
           </div>
           <div
-            className={toggleState === 4 ? "content active-content" : "content"}
+            className={
+              toggleState === 4 && showNotifications
+                ? "content active-content"
+                : "content"
+            }
           >
-            <Notification />
+            {showNotifications && <Notification />}
           </div>
         </div>
       </main>

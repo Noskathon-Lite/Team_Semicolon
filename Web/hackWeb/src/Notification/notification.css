@@ -1,28 +1,26 @@
 
 
 .notification-container{
-    position: relative;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-    z-index: 1;
-    height: 60px;
-    margin-right: 15%;
-    padding-left: 15%;
+    /* background-color: antiquewhite; */
+    height: 80%;
 }
 .notification-popup{
-    position: absolute;
+   
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    z-index: 1;
-    height: 600px;
-    margin-right: 15%;
-    padding-left: 15%;
-    background-color: #f1f1f1;
-    border: 1px solid #ccc;
+   
+    height:100%;
+    
+    /* background-color: #f1f1f1;
+    border: 1px solid #ccc; */
     border-radius: 5px;
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.2);
     margin-top: 10px;
@@ -34,3 +32,36 @@
     text-align: left;
    
 }
+.notification-popup .notify{
+    font-size: 1.5em;
+    font-weight: 700;
+    color: black;
+    text-align: center;
+}
+
+.notification-list {
+    list-style-type: none;
+    padding: 10px;
+  }
+  
+  .notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  .notification-item.unread {
+    background-color: white;
+    font-weight: bold;
+    color:black;
+  }
+  
+  .notification-item.read {
+    background-color: white;
+    font-weight: normal;
+    color: rgb(85, 81, 81);
+  }
+  
+  .notification-item:hover {
+    background-color: #f1f1f1;
+  }
