@@ -21,8 +21,8 @@ const AddOfficerModal = ({ show, onClose, onAddOfficer }) => {
       isOpen={show}
       onRequestClose={onClose}
       contentLabel="Add Officer"
-      className="modal-content"
-      overlayClassName="modal-overlay"
+      className="modal-content-addofficer"
+      overlayClassName="modal-overlay-addofficer"
     >
       <div className="officer-content">
         <div className="officer-header">
