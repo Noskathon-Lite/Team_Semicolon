@@ -51,6 +51,6 @@ interface ApiInterface {
     //criminal ko
     @GET("list/criminal/")
     suspend fun fetchData(
-        @Header("Authorization") token: String
+        @Header("Authorization") authorization: String
     ): List<criminalsItem>
 }

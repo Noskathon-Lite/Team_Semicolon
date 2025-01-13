@@ -21,7 +21,7 @@ messaging.onBackgroundMessage((payload) => {
   const notificationOptions = {
     body: payload.notification.body,
     icon: payload.notification.icon,
-    sound: '/assets/sound/notification-sound1.mp3', // Include sound here
+    sound: '/assets/sound/notification-sound1.mp3',
     data: payload.data,
     
   };
