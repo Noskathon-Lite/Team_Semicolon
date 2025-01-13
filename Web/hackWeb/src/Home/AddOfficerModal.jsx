@@ -22,7 +22,7 @@ const AddOfficerModal = ({ show, onClose, onAddOfficer }) => {
       onRequestClose={onClose}
       contentLabel="Add Officer"
       className="modal-content-addofficer"
-      overlayClassName="modal-overlay-addofficer"
+      overlayClassName="modal-overlay-addOfficer"
     >
       <div className="officer-content">
         <div className="officer-header">

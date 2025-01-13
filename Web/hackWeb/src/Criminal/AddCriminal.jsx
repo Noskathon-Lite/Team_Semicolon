@@ -6,13 +6,15 @@ import "./addCriminal.css";
 
 ReactModal.setAppElement("#root");
 
-const AddCriminalModal = ({ show, onClose, onAddOfficer }) => {
+const AddCriminalModal = ({ show, onClose, onAddCriminal }) => {
   const [name, setName] = useState("");
-  const [number, setNumber] = useState("");
+  const [gender, setGender] = useState("");
+  const [age, setAge] = useState("");
+  const [isWanted, setIsWanted] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddOfficer({ name, number });
+    onAddCriminal({ name, gender, age, isWanted });
     onClose();
   };
 
@@ -21,19 +23,19 @@ const AddCriminalModal = ({ show, onClose, onAddOfficer }) => {
       isOpen={show}
       onRequestClose={onClose}
       contentLabel="Add Officer"
-      className="modal-content-addofficer"
-      overlayClassName="modal-overlay-addofficer"
+      className="modal-content-addCriminal"
+      overlayClassName="modal-overlay-addCriminal"
     >
       <div className="officer-content">
         <div className="officer-header">
-        <h1>Add Officer</h1>
+        <h1>Add Criminal</h1>
       <button className="officer-modal-close" onClick={onClose}><IoClose  className="close-icon"/></button>
       
         </div>
      <hr className="add-horizontal" />
       <form onSubmit={handleSubmit} className="officer-form">
         <label className="officer-label">
-          <p>Officer Name:</p> 
+          <p> Name:</p> 
           <input
           className="officer-input"
             type="text"
@@ -43,11 +45,48 @@ const AddCriminalModal = ({ show, onClose, onAddOfficer }) => {
           />
         </label>
         <label className="officer-label">
-         <p>Officer Number: </p> 
+            <p>Gender:</p>
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Male"
+                  checked={gender === "Male"}
+                  onChange={(e) => setGender(e.target.value)}
+                  
+                />
+                Male
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="gender"
+                  value="Female"
+                  checked={gender === "Female"}
+                  onChange={(e) => setGender(e.target.value)}
+                  
+                />
+                Female
+              </label>
+            </div>
+          </label>
+        <label className="officer-label">
+         <p>Age </p> 
+          <input
+          className="officer-input"
+            type="number"
+            value={age}
+            onChange={(e) => setNumber(e.target.value)}
+            required
+          />
+        </label>
+        <label className="officer-label">
+         <p>Case </p> 
           <input
           className="officer-input"
             type="text"
-            value={number}
+            value={crime}
             onChange={(e) => setNumber(e.target.value)}
             required
           />
