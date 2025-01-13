@@ -9,6 +9,7 @@ import com.example.surakhsit_nepal.CriminalDatabase.criminalsItem
 import com.example.surakhsit_nepal.feedbackTest.FeedbackRequest
 import com.example.surakhsit_nepal.feedbackTest.FeedbackResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -32,9 +33,12 @@ interface ApiInterface {
 
     //video ko lagi
     @Multipart
-    @POST("lat/")
+    @POST("upload/")
     suspend fun uploadVideo(
-        @Part video_file: MultipartBody.Part
+        @Header("Authorization") token: String,
+        @Part video: MultipartBody.Part,
+        @Part("latitude") latitude: RequestBody,
+        @Part("longitude") longitude: RequestBody
     ): Response<ResponseBody>
 
     //feedback ko lagi
