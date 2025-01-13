@@ -102,3 +102,10 @@ class ProcessedVideo(models.Model):
 
     def __str__(self):
         return f"Video uploaded at {self.uploaded_date} (Location: {self.location_latitude}, {self.location_longitude})"
+
+
+class ProcessedFrame(models.Model):
+    video = models.ForeignKey(ProcessedVideo, on_delete=models.CASCADE, related_name='frames')
+    frame_file = models.ImageField(upload_to='detected_frames/')
+    timestamp = models.FloatField()  # Timestamp in seconds
+    created_at = models.DateTimeField(auto_now_add=True)
