@@ -35,12 +35,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             navController = rememberNavController()
             //OnBoardingScreen()
-           // SetUpNavigation(navController)
+            SetUpNavigation(navController)
             //HomePage(navController)
            // MainScreen(navController)
             //CameraPage(navController)
            // FeedBack(navController)
-            WantedList(navController)
+        //    WantedList(navController)
 
 
         }

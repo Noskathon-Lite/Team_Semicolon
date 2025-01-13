@@ -2,6 +2,7 @@ package com.example.surakhsit_nepal.MainPages
 
 
 import android.os.Build
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -50,6 +51,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -70,6 +72,8 @@ import java.time.LocalTime
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HomePage(navController : NavHostController) {
+
+    val context = LocalContext.current
 
     //permission ko lagi notification
     val PermissionState = rememberPermissionState(
@@ -153,7 +157,8 @@ fun HomePage(navController : NavHostController) {
                         IconsImage(Icons.Default.ContactEmergency, "Emergency\n Numbers"){
                             navController.navigate(Screens.emergency_number.route)
                         }
-                        IconsImage(Icons.Default.Inbox, "e-Complaint"){}
+                        IconsImage(Icons.Default.Inbox, "e-Complaint"){
+                            Toast.makeText(context,"This section will be availble soon!!", Toast.LENGTH_LONG).show()}
                         IconsImage(Icons.Default.PersonPin," Wanted "){
                             navController.navigate(Screens.wanted.route)
                         }
