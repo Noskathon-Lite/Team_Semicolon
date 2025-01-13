@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "app",
     "rest_framework",
     "corsheaders",
+    'channels',
     
 ]
 
@@ -158,3 +159,13 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+ASGI_APPLICATION ='app.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',  # For development
+    },
+}
