@@ -43,18 +43,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
+import coil.request.ImageRequest
+import coil.request.ImageResult
 import com.example.surakhsit_nepal.Backend.BackendData.BackendViewModel
 import com.example.surakhsit_nepal.Components.BelowNavBar
 import com.example.surakhsit_nepal.Components.TopNavBar
 import com.example.surakhsit_nepal.CriminalDatabase.CriminalsViewModel
 import com.example.surakhsit_nepal.CriminalDatabase.criminals
 import com.example.surakhsit_nepal.CriminalDatabase.criminalsItem
+import com.example.surakhsit_nepal.R
 import com.example.surakhsit_nepal.ui.theme.backgroundColor
 
 
@@ -111,47 +116,47 @@ fun WantedDataShow(data : criminalsItem){
     var isExpanded by remember { mutableStateOf(false) }
 
     Card(
-        modifier = Modifier.fillMaxWidth(.4f)
+        modifier = Modifier
+            .fillMaxWidth(.4f)
             .padding(top = 10.dp)
             .height(
-                if(isExpanded) 180.dp else 90.dp
+                if (isExpanded) 180.dp else 90.dp
             )
             .clip(RoundedCornerShape(10.dp))
-
             .clickable {
                 isExpanded = !isExpanded
             },
-
         colors = CardDefaults.cardColors(backgroundColor)
-    )
-    {
+    ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Image(
-                imageVector = Icons.Default.PersonPinCircle,
-                contentDescription = "image",
-                colorFilter = ColorFilter.tint(Color.White),
+
+            val fullImageUrl = "http://192.168.23.8:8000" + data.image
+
+
+            // Display the image
+            AsyncImage(
+                model  = ImageRequest.Builder(context = LocalContext.current).data(fullImageUrl).crossfade(true).build(),
+                contentDescription = "Criminal Image",
                 modifier = Modifier.size(60.dp)
-
-
-
             )
-            if(isExpanded){
+
+
+            if (isExpanded) {
                 Spacer(modifier = Modifier.height(20.dp))
-                Column(){
-                    Text(text =data.name , color = Color.White)
+                Column() {
+                    Text(text = data.name, color = Color.White)
                     Text(text = "${data.age}", color = Color.White)
                     Text(text = data.gender, color = Color.White)
-                    Text(text = data.case,color = Color.White)
-
+                    Text(text = data.case, color = Color.White)
                 }
             }
-
         }
     }
+
 
 }
 
