@@ -15,6 +15,7 @@ const Home = () => {
   const [alertList, setAlertList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [officers, setOfficers] = useState([]);
 
   
 
