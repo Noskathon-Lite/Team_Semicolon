@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User , Criminal , Feedback
+from .models import User , Criminal , Feedback , ProcessedVideo
 
 
 class CustomUserAdmin(UserAdmin):
@@ -25,3 +25,5 @@ admin.site.register(User, CustomUserAdmin)
 admin.site.register(Criminal)
 
 admin.site.register(Feedback)
+
+admin.site.register(ProcessedVideo)
